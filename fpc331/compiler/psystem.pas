@@ -482,8 +482,8 @@ implementation
             addtype('Extended',pbestrealtype^);
             { CExtended corresponds to the C version of the Extended type
               (either "long double" or "double") }
-            if target_info.system in systems_android then
-              { Android has "long double"="double" even for x86 }
+            if target_info.system in (systems_android+systems_harmonyos) then
+              { Android/HarmonyOS has "long double"="double" even for x86 }
               addtype('CExtended',s64floattype)
             else
               if tfloatdef(pbestrealtype^).floattype=s80real then

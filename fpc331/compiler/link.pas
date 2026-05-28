@@ -712,7 +712,9 @@ Implementation
               begin
                 result:=result+'-'+tripletcpustr(triplet_llvmrt);
                 if target_info.system in systems_android then
-                  result:=result+'-android';
+                  result:=result+'-android'
+                else if target_info.system in systems_harmonyos then
+                  result:=result+'-ohos';
               end;
           end;
         result:=result+target_info.sharedClibext;

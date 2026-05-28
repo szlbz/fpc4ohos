@@ -10,7 +10,7 @@ procedure add_rtl_console(const ADirectory: string);
 Const
   // All Unixes have full set of KVM+Crt in unix/ except QNX which is not
   // in workable state atm.
-  UnixLikes = AllUnixOSes -[QNX];
+  UnixLikes = AllUnixOSes -[QNX] + [ohos];
 
   WinEventOSes = [win32,win64];
   KVMAll       = [emx,go32v2,msdos,netware,netwlibc,os2,win32,win64,win16]+UnixLikes+AllAmigaLikeOSes;
@@ -143,4 +143,5 @@ begin
   Installer.Run;
 end.
 {$endif ALLPACKAGES}
+
 

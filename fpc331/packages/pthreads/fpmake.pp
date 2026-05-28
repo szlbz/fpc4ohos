@@ -18,7 +18,7 @@ begin
     P.Directory:=ADirectory;
 {$endif ALLPACKAGES}
     P.Version:='3.3.1';
-    P.OSes := [beos,haiku,freebsd,darwin,iphonesim,ios,solaris,netbsd,openbsd,linux,aix,dragonfly,android];
+    P.OSes := [beos,haiku,freebsd,darwin,iphonesim,ios,solaris,netbsd,openbsd,linux,aix,dragonfly,android,ohos];
     if Defaults.CPU=jvm then
       P.OSes := P.OSes - [java,android];
 
@@ -29,7 +29,7 @@ begin
     with T.Dependencies do
       begin
         AddInclude('pthrandroid.inc',[Android]);
-        AddInclude('pthrlinux.inc',[Linux]);
+        AddInclude('pthrlinux.inc',[Linux,ohos]);
         AddInclude('pthrbeos.inc',[Beos]);
         AddInclude('pthrsnos.inc',[Solaris]);
         AddInclude('pthrbsd.inc',AllBSDOses);

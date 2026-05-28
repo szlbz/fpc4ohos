@@ -66,6 +66,9 @@ implementation
     {$ifndef NOTARGETANDROID}
       ,t_android
     {$endif}
+    {$ifndef NOTARGETHARMONYOS}
+      ,t_harmonyos
+    {$endif}
 
 {**************************************
              Assemblers

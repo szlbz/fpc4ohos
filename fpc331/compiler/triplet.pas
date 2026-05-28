@@ -51,7 +51,7 @@ uses
           else
             result:=result+'-ios'+iPhoneOSVersionMin.str;
         end
-      else if target_info.system in (systems_linux+systems_android) then
+      else if target_info.system in (systems_linux+systems_android+systems_harmonyos) then
         result:=result+'-unknown-linux'
       else if target_info.system in systems_all_windows then
         begin
@@ -81,6 +81,8 @@ uses
       { environment/ABI }
       if target_info.system in systems_android then
         result:=result+'-android'
+      else if target_info.system in systems_harmonyos then
+        result:=result+'-ohos'
       else
 {$ifdef arm}
       if target_info.abi=abi_eabihf then

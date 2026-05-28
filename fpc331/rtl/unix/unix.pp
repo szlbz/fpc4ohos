@@ -1307,6 +1307,18 @@ end;
                         General information calls
 ******************************************************************************}
 
+{$if defined(ohos)}
+Function GetDomainName:String;
+Var
+  Sysn : utsname;
+begin
+  If fpUname(sysn)<>0 then
+   getdomainname:=''
+  else
+   getdomainname:=strpas(@Sysn.domain[0]);
+end;
+{$endif}
+
 {$if defined(Linux)}
 Function GetDomainName:String;  { linux only!}
 // domainname is a glibc extension.

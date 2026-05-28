@@ -692,7 +692,7 @@ implementation
 
     procedure TAsmData.getlabel(out l : TAsmLabel;alt:TAsmLabeltype);
       begin
-        if (target_info.system in (systems_linux + systems_bsd + systems_android)) and
+        if (target_info.system in (systems_linux + systems_bsd + systems_android + systems_harmonyos)) and
            { the next condition was
              (cs_create_smart in current_settings.moduleswitches) and
              but if we create_smartlink_sections, this is useless }

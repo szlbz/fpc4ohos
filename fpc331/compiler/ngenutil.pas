@@ -1257,7 +1257,7 @@ implementation
           if assigned(entry^.module.realmodulename) then
             begin
               { Create string constant and emit pointer to it }
-              unitinits.start_internal_data_builder(current_asmdata.asmlists[al_globals],sec_rodata,'',unitnametcb,unitnamelbl);
+              unitinits.start_internal_data_builder(current_asmdata.asmlists[al_globals],sec_data,'',unitnametcb,unitnamelbl);
               unitnamedef:=unitnametcb.emit_shortstring_const(entry^.module.realmodulename^);
               unitinits.finish_internal_data_builder(unitnametcb,unitnamelbl,unitnamedef,sizeof(pint));
               unitinits.queue_init(charpointertype);
@@ -1576,7 +1576,7 @@ implementation
       current_asmdata.AsmLists[al_globals].concatList(
         tcb.get_final_asmlist(
           current_asmdata.DefineAsmSymbol('FPC_RESOURCESTRINGTABLES',AB_GLOBAL,AT_DATA,tabledef),
-          tabledef,sec_rodata,'FPC_RESOURCESTRINGTABLES',const_align(sizeof(pint))
+          tabledef,sec_data,'FPC_RESOURCESTRINGTABLES',const_align(sizeof(pint))
         )
       );
       tcb.free;
@@ -1604,7 +1604,7 @@ implementation
             tcb.get_final_asmlist(
               current_asmdata.DefineAsmSymbol('FPC_RESLOCATION',AB_GLOBAL,AT_DATA,voidpointertype),
               voidpointertype,
-              sec_rodata,
+              sec_data,
               'FPC_RESLOCATION',
               const_align(sizeof(puint))
             )

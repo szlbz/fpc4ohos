@@ -108,9 +108,16 @@ program pp;
 {$endif I386}
 {$ifdef x86_64}
   {$ifdef CPUDEFINED}
-    {$fatal ONLY one of the switches for the CPU type must be defined}
+    { Allow combined x86_64 + aarch64 for cross-compiler }
+    {$ifdef AARCH64}
+      {$define CROSSCPU}
+    {$else}
+      {$fatal ONLY one of the switches for the CPU type must be defined}
+    {$endif}
   {$endif CPUDEFINED}
-  {$define CPUDEFINED}
+  {$ifndef CROSSCPU}
+    {$define CPUDEFINED}
+  {$endif}
 {$endif x86_64}
 {$ifdef M68K}
   {$ifdef CPUDEFINED}
@@ -168,9 +175,16 @@ program pp;
 {$endif}
 {$ifdef AARCH64}
   {$ifdef CPUDEFINED}
-    {$fatal ONLY one of the switches for the CPU type must be defined}
+    { Allow combined x86_64 + aarch64 for cross-compiler }
+    {$ifdef x86_64}
+      {$define CROSSCPU}
+    {$else}
+      {$fatal ONLY one of the switches for the CPU type must be defined}
+    {$endif}
   {$endif CPUDEFINED}
-  {$define CPUDEFINED}
+  {$ifndef CROSSCPU}
+    {$define CPUDEFINED}
+  {$endif}
 {$endif AARCH64}
 {$ifdef RISCV32}
   {$ifdef CPUDEFINED}

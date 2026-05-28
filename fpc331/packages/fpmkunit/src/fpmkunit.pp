@@ -166,7 +166,7 @@ Type
     win64,wince,gba,nds,embedded,symbian,haiku,iphonesim,
     aix,java,android,nativent,msdos,wii,aros,dragonfly,
     win16,freertos,zxspectrum,msxdos,ios,amstradcpc,sinclairql,
-    wasip1,human68k,ps1,wasip1threads,wasip2
+    wasip1,human68k,ps1,wasip1threads,wasip2,ohos
   );
   TOSes = Set of TOS;
 
@@ -235,7 +235,7 @@ Const
 
   AllOSes = [Low(TOS)..High(TOS)];
   AllCPUs = [Low(TCPU)..High(TCPU)];
-  AllUnixOSes  = [Linux,FreeBSD,NetBSD,OpenBSD,Darwin,QNX,BeOS,Solaris,Haiku,iphonesim,ios,aix,Android,dragonfly];
+  AllUnixOSes  = [Linux,FreeBSD,NetBSD,OpenBSD,Darwin,QNX,BeOS,Solaris,Haiku,iphonesim,ios,aix,Android,dragonfly,ohos];
   AllBSDOSes      = [FreeBSD,NetBSD,OpenBSD,Darwin,iphonesim,ios,dragonfly];
   AllWindowsOSes  = [Win32,Win64,WinCE];
   AllAmigaLikeOSes = [Amiga,MorphOS,AROS];
@@ -297,7 +297,8 @@ Const
     { human68k }( false, false, true,  false, false, false, false, false, false, false, false, false, false, false,   false, false, false, false, false,  false,  false,   false, false, false),
     { ps1 }     ( false, false, false, false, false, false, false, false, false, false, false, true,  false, false,   false, false, false, false, false,  false,  false,   false, false, false),
  {wasip1threads}( false, false, false, false, false, false, false, false, false, false, false, false, false, false,   false, false, false, true,  false,  false,  false,   false, false, false),
-    { wasip2 }  ( false, false, false, false, false, false, false, false, false, false, false, false, false, false,   false, false, false, true,  false,  false,  false,   false, false, false)
+    { wasip2 }  ( false, false, false, false, false, false, false, false, false, false, false, false, false, false,   false, false, false, true,  false,  false,  false,   false, false, false),
+    { ohos }    ( false, false, false, false, false, true,  true,  false, false, false, false, false, false, false,   false, false, true,  false, false,  false,  false,   false, false, false)
   );
 
   // Useful

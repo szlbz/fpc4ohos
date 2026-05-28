@@ -2451,6 +2451,8 @@ end;
 
 function FPGammaGet: single;
 begin
+  if FPGammaExpFactor = 0 then
+    FPGammaSet;
   result := FPGammaExpFactor;
 end;
 
@@ -2686,7 +2688,9 @@ end;
 
 
 initialization
-   FPGammaSet();
+   { Gamma table is initialized lazily on first use.
+     Do NOT call FPGammaSet() here as it may cause FPU issues
+     during library startup on some platforms (e.g. HarmonyOS). }
 
    PrepareReferenceWhiteArray;
    FPReferenceWhite :=FPReferenceWhite2D50;

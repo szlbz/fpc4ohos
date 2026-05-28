@@ -36,7 +36,7 @@ interface
   uses initc, ctypes, unixtype;
 {$ENDIF FPC_DOTTEDUNITS}
   {$i pthrandroid.inc}
-{$elseif defined(linux)}
+{$elseif defined(linux) or defined(ohos)}
 {$IFDEF FPC_DOTTEDUNITS}
   uses System.InitC, System.CTypes, UnixApi.Types;
 {$ELSE FPC_DOTTEDUNITS}

@@ -607,7 +607,7 @@ implementation
           tcb.emit_tai(tai_const.create_nil_dataptr,voidpointertype)
         else
           begin
-            tcb.start_internal_data_builder(current_asmdata.AsmLists[al_rtti],sec_rodata,'',datatcb,tbllbl);
+            tcb.start_internal_data_builder(current_asmdata.AsmLists[al_rtti],sec_data,'',datatcb,tbllbl);
 
             datatcb.begin_anonymous_record('',defaultpacking,min(reqalign,SizeOf(PInt)),
               targetinfos[target_info.system]^.alignment.recordalignmin);
@@ -1087,7 +1087,7 @@ implementation
             paramdef : tdef;
             i : longint;
           begin
-              tcb.start_internal_data_builder(current_asmdata.AsmLists[al_rtti],sec_rodata,'',paramtcb,paramlbl);
+              tcb.start_internal_data_builder(current_asmdata.AsmLists[al_rtti],sec_data,'',paramtcb,paramlbl);
 
               paramtcb.begin_anonymous_record('',defaultpacking,min(reqalign,SizeOf(PInt)),
                 targetinfos[target_info.system]^.alignment.recordalignmin);
@@ -1227,7 +1227,7 @@ implementation
                     { write TPropInfo record }
                     tbldef:=write_propinfo_data(tbltcb,tpropertysym(sym));
                     current_asmdata.asmlists[al_rtti].concatlist(
-                      tbltcb.get_final_asmlist(tbllab,tbldef,sec_rodata,tbllab.name,const_align(sizeof(pint)))
+tbltcb.get_final_asmlist(tbllab,tbldef,sec_data,tbllab.name,const_align(sizeof(pint)))
                     );
                     tbltcb.free;
                     tbltcb := nil;
@@ -1722,7 +1722,7 @@ implementation
             rttidef := tcb.end_anonymous_record;
 
             current_asmdata.AsmLists[al_rtti].concatList(
-              tcb.get_final_asmlist(rttilab,rttidef,sec_rodata,rttilab.name,
+tcb.get_final_asmlist(rttilab,rttidef,sec_data,rttilab.name,
               sizeof(PInt)));
             tcb.free;
             tcb := nil;
@@ -2240,7 +2240,7 @@ implementation
             argdef:=argtcb.end_anonymous_record;
 
             current_asmdata.asmlists[al_rtti].concatlist(
-              argtcb.get_final_asmlist(arglab,argdef,sec_rodata,arglab.name,const_align(sizeof(pint)))
+              argtcb.get_final_asmlist(arglab,argdef,sec_data,arglab.name,const_align(sizeof(pint)))
             );
 
             argtcb.free;
@@ -2302,7 +2302,7 @@ implementation
       tbldef:=tbltcb.end_anonymous_record;
 
       current_asmdata.asmlists[al_rtti].concatlist(
-        tbltcb.get_final_asmlist(tbllab,tbldef,sec_rodata,tbllab.name,const_align(sizeof(pint)))
+        tbltcb.get_final_asmlist(tbllab,tbldef,sec_data,tbllab.name,const_align(sizeof(pint)))
       );
 
       tbltcb.free;
@@ -2450,7 +2450,7 @@ implementation
             tabledef:=tcb.end_anonymous_record;
             rttilab:=current_asmdata.DefineAsmSymbol(Tstoreddef(def).rtti_mangledname(rt)+'_o2s',AB_GLOBAL,AT_DATA_NOINDIRECT,tabledef);
             current_asmdata.asmlists[al_rtti].concatlist(tcb.get_final_asmlist(
-              rttilab,tabledef,sec_rodata,
+              rttilab,tabledef,sec_data,
               rttilab.name,sizeof(PInt)));
             tcb.free;
             tcb := nil;
@@ -2497,7 +2497,7 @@ implementation
           tabledef:=tcb.end_anonymous_record;
           rttilab:=current_asmdata.DefineAsmSymbol(Tstoreddef(def).rtti_mangledname(rt)+'_s2o',AB_GLOBAL,AT_DATA_NOINDIRECT,tabledef);
           current_asmdata.asmlists[al_rtti].concatlist(tcb.get_final_asmlist(
-            rttilab,tabledef,sec_rodata,
+            rttilab,tabledef,sec_data,
             rttilab.name,sizeof(PInt)));
           tcb.free;
           tcb := nil;
@@ -2685,7 +2685,7 @@ implementation
         maybe_add_comment(tcb,'RTTI: end Type '+def.GetTypeName+' ('+rttitypenames[rt]+')');
         rttilab:=current_asmdata.DefineAsmSymbol(tstoreddef(def).rtti_mangledname(rt),AB_GLOBAL,AT_DATA_NOINDIRECT,rttidef);
         current_asmdata.AsmLists[al_rtti].concatList(
-          tcb.get_final_asmlist(rttilab,rttidef,sec_rodata,rttilab.name,min(target_info.alignment.maxCrecordalign,SizeOf(QWord))));
+          tcb.get_final_asmlist(rttilab,rttidef,sec_data,rttilab.name,min(target_info.alignment.maxCrecordalign,SizeOf(QWord))));
         tcb.free;
         tcb := nil;
 

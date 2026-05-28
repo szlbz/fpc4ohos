@@ -1233,11 +1233,7 @@ function get_next_varsym(def: tabstractrecorddef; const SymList:TFPHashObjectLis
           begin
             { Certain types like windows WideString are initialized at runtime and cannot
               be placed into readonly memory }
-            if (fsym.varspez=vs_const) and
-               not (vo_force_finalize in fsym.varoptions) then
-              sec:=sec_rodata
-            else
-              sec:=sec_data;
+            sec:=sec_data;
             secname:=asmsym.Name;
           end;
         reslist:=ftcb.get_final_asmlist(asmsym,fsym,fsym.vardef,sec,secname,fsym.vardef.alignment);
@@ -1289,10 +1285,7 @@ function get_next_varsym(def: tabstractrecorddef; const SymList:TFPHashObjectLis
                   end
                 else
                   begin
-                    if fsym.varspez=vs_const then
-                      sectype:=sec_rodata
-                    else
-                      sectype:=sec_data;
+                    sectype:=sec_data;
                     ftcb.start_internal_data_builder(fdatalist,sectype,'',datatcb,ll);
 
                     llofs:=datatcb.begin_dynarray_const(def,ll,dyncountloc);

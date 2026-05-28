@@ -164,7 +164,7 @@ Type
     function pthread_setspecific(__key:pthread_key_t; __pointer:pointer):longint;cdecl;external;
     function pthread_getspecific(__key:pthread_key_t):pointer;cdecl;external;
 {    function pthread_once(__once_control:ppthread_once_t; __init_routine:tprocedure ):longint;cdecl;external;}
-{$ifndef ANDROID}
+{$if not defined(ANDROID) and not defined(ohos)}
     function pthread_setcancelstate(__state:longint; __oldstate:plongint):longint;cdecl;external;
     function pthread_setcanceltype(__type:longint; __oldtype:plongint):longint;cdecl;external;
     function pthread_cancel(__thread:pthread_t):longint;cdecl;external;
@@ -247,7 +247,7 @@ Var
     pthread_setspecific : Function(__key:pthread_key_t; __pointer:pointer):longint;cdecl;
     pthread_getspecific : Function(__key:pthread_key_t):pointer;cdecl;
 {    pthread_once : Function(__once_control:ppthread_once_t; __init_routine:tprocedure ):longint;cdecl;}
-{$ifndef ANDROID}
+{$if not defined(ANDROID) and not defined(ohos)}
     pthread_setcancelstate : Function(__state:longint; __oldstate:plongint):longint;cdecl;
     pthread_setcanceltype : Function(__type:longint; __oldtype:plongint):longint;cdecl;
     pthread_cancel : Function(__thread:pthread_t):longint;cdecl;
@@ -343,7 +343,7 @@ begin
   Pointer(pthread_setspecific) := dlsym(PthreadDLL,'pthread_setspecific');
   Pointer(pthread_getspecific) := dlsym(PthreadDLL,'pthread_getspecific');
 {  Pointer(pthread_once) := dlsym(PthreadDLL,'pthread_once');}
-{$ifndef ANDROID}
+{$if not defined(ANDROID) and not defined(ohos)}
   Pointer(pthread_setcancelstate) := dlsym(PthreadDLL,'pthread_setcancelstate');
   Pointer(pthread_setcanceltype) := dlsym(PthreadDLL,'pthread_setcanceltype');
   Pointer(pthread_cancel) := dlsym(PthreadDLL,'pthread_cancel');
@@ -353,7 +353,7 @@ begin
 {  Pointer(_pthread_cleanup_push_defer) := dlsym(PthreadDLL,'_pthread_cleanup_push_defer');}
 {  Pointer(pthread_sigmask) := dlsym(PthreadDLL,'pthread_sigmask');}
   Pointer(pthread_kill)  := dlsym(PthreadDLL,'pthread_kill');
-{$ifndef ANDROID}
+{$if not defined(ANDROID) and not defined(ohos)}
   Pointer(pthread_atfork):= dlsym(PthreadDLL,'pthread_atfork');
   Pointer(pthread_kill_other_threads_np) := dlsym(PthreadDLL,'pthread_kill_other_threads_np');
 {$endif}

@@ -286,7 +286,7 @@ Type
 {$packrecords c}
 {$endif}
 
-{$if defined(Linux)}
+{$if defined(Linux) or defined(ohos)}
 {$ifdef cpux86_64}
   TShmid_ds = record
     shm_perm  : TIPC_Perm;
@@ -339,7 +339,7 @@ Type
 {$endif aix}
 
   const
-{$if defined(Linux) or defined(Solaris)}
+{$if defined(Linux) or defined(Solaris) or defined(ohos)}
      SHM_R      = 4 shl 6;
      SHM_W      = 2 shl 6;
 {$else}
@@ -349,7 +349,7 @@ Type
 
      SHM_RDONLY = 1 shl 12;
      SHM_RND    = 2 shl 12;
-{$if defined(Linux)}
+{$if defined(Linux) or defined(ohos)}
      SHM_REMAP  = 4 shl 12;
 {$endif}
 {$ifdef Darwin}
@@ -443,7 +443,7 @@ const
   MSG_WWAIT = 2 shl 9;  // a writer is waiting to send
 {$endif}
 
-{$if defined(Linux)}
+{$if defined(Linux) or defined(ohos)}
   MSG_EXCEPT  = 2 shl 12;
 
   MSGMNI = 128;
@@ -526,7 +526,7 @@ type
     msg_qnum_cv: cshort;
     msg_pad4   : array [0..2] of clong;
   end;
-{$elseif defined(Linux)}
+{$elseif defined(Linux) or defined(ohos)}
   PMSQid_ds = ^TMSQid_ds;
   TMSQid_ds = record
 { 32 bit }
@@ -630,7 +630,7 @@ type
     mtext : array[0..0] of AnsiChar;
   end;
 
-{$if defined(linux)}
+{$if defined(linux) or defined(ohos)}
   PMSGinfo = ^TMSGinfo;
   TMSGinfo = record
     msgpool : cint;
@@ -672,7 +672,7 @@ Function msgctl(msqid:cint; cmd: cint; buf: PMSQid_ds): cint; {$ifdef FPC_USE_LI
   ----------------------------------------------------------------------}
 
 const
-{$if defined(Linux)}                  // renamed to many name clashes
+{$if defined(Linux) or defined(ohos)}                  // renamed to many name clashes
   SEM_UNDO = $1000;
   SEM_GETPID = 11;
   SEM_GETVAL = 12;
@@ -711,7 +711,7 @@ const
 {$endif}
 
 type
-{$if defined(Linux)}
+{$if defined(Linux) or defined(ohos)}
 
 {$ifndef linux_ipc32}
  PSEMid_ds = ^TSEMid_ds;
@@ -872,7 +872,7 @@ Type
       0 : ( val : cint );
       1 : ( buf : PSEMid_ds );
       2 : ( arr : PWord );              // ^ushort
-{$if defined(linux)}
+{$if defined(linux) or defined(ohos)}
       3 : ( padbuf : PSeminfo );
       4 : ( padpad : pointer );
 {$endif}
@@ -881,7 +881,7 @@ Type
 Function semget(key:Tkey; nsems:cint; semflg:cint): cint; {$ifdef FPC_USE_LIBC} cdecl; external clib name 'semget'; {$endif}
 Function semop(semid:cint; sops: psembuf; nsops: cuint): cint; {$ifdef FPC_USE_LIBC} cdecl; external clib name 'semop'; {$endif}
 Function semctl(semid:cint; semnum:cint; cmd:cint; var arg: tsemun): cint;
-{$if defined(linux)}
+{$if defined(linux) or defined(ohos)}
 Function semtimedop(semid:cint; sops: psembuf; nsops: cuint; timeOut: ptimespec): cint; {$ifdef FPC_USE_LIBC} cdecl; external name 'semtimedop'; platform; {$else} platform; {$endif}
 {$endif}
 {$ifdef aix}
@@ -906,7 +906,7 @@ uses Syscall;
 {$ENDIF}
 
 {$ifndef FPC_USE_LIBC}
- {$if defined(Linux)}
+ {$if defined(Linux) or defined(ohos)}
   {$if defined(cpux86_64) or defined(cpuaarch64) or defined(cpuriscv32) or defined(cpuriscv64) or defined(cpuxtensa) or defined(cpuloongarch64) or defined(NO_SYSCALL_IPC)}
     {$i ipcsys.inc}
   {$else}

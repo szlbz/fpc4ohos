@@ -218,8 +218,12 @@
              system_mipsel_ps1,         { 123 }
              system_wasm32_wasip1threads,{ 124 }
              system_wasm32_wasip2,      { 125 }
-             system_powerpc64_freebsd   { 126 }
-       );
+              system_powerpc64_freebsd,  { 126 }
+              { HarmonyOS targets }
+              system_arm_harmonyos,     { 127 }
+              system_aarch64_harmonyos, { 128 }
+              system_x86_64_harmonyos   { 129 }
+        );
 
      type
        tasm = (as_none
@@ -344,8 +348,9 @@
              ld_amstradcpc,
              ld_sinclairql,
              ld_wasi,
-             ld_human68k,
-             ld_ps1
+              ld_human68k,
+              ld_ps1,
+              ld_harmonyos
        );
 
        tar = (ar_none

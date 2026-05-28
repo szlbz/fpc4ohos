@@ -232,7 +232,7 @@ implementation
       begin
          if assigned(p^.l) then
            writenames(tcb,p^.l);
-         tcb.start_internal_data_builder(current_asmdata.AsmLists[al_const],sec_rodata,_class.vmt_mangledname,datatcb,p^.nl);
+         tcb.start_internal_data_builder(current_asmdata.AsmLists[al_const],sec_data,_class.vmt_mangledname,datatcb,p^.nl);
          len:=length(p^.data.messageinf.str^);
          datatcb.maybe_begin_aggregate(carraydef.getreusable(cansichartype,len+1));
          datatcb.emit_tai(Tai_string.Create_Data(@p^.data.messageinf.str^[0],len+1,false),carraydef.getreusable(cansichartype,len+1));
@@ -276,7 +276,7 @@ implementation
            writenames(tcb,root);
 
          { now start writing the message string table }
-         tcb.start_internal_data_builder(current_asmdata.AsmLists[al_const],sec_rodata,_class.vmt_mangledname,datatcb,lab);
+         tcb.start_internal_data_builder(current_asmdata.AsmLists[al_const],sec_data,_class.vmt_mangledname,datatcb,lab);
          {
            TStringMessageTable = record
               count : longint;
@@ -347,7 +347,7 @@ implementation
                 msgs : array[0..0] of TMsgIntTable;
              end;
          }
-         tcb.start_internal_data_builder(current_asmdata.AsmLists[al_const],sec_rodata,_class.vmt_mangledname,datatcb,lab);
+         tcb.start_internal_data_builder(current_asmdata.AsmLists[al_const],sec_data,_class.vmt_mangledname,datatcb,lab);
          get_tabledef(itp_vmt_msgint_table_entries,s32inttype,msginttabledef,count,0,msgintdef,msgintarrdef);
          datatcb.maybe_begin_aggregate(msgintdef);
          datatcb.emit_tai(Tai_const.Create_32bit(count),s32inttype);
@@ -493,7 +493,7 @@ implementation
                (pd.visibility=vis_published) then
               begin
                 { l: name_of_method }
-                lists^.pubmethodstcb.start_internal_data_builder(current_asmdata.AsmLists[al_const],sec_rodata,_class.vmt_mangledname,datatcb,l);
+                lists^.pubmethodstcb.start_internal_data_builder(current_asmdata.AsmLists[al_const],sec_data,_class.vmt_mangledname,datatcb,l);
                 namedef:=datatcb.emit_shortstring_const(tsym(p).realname);
                 lists^.pubmethodstcb.finish_internal_data_builder(datatcb,l,namedef,sizeof(pint));
                 { the tmethodnamerec }
@@ -549,7 +549,7 @@ implementation
                     entries : packed array[0..0] of tmethodnamerec;
                   end;
                }
-              tcb.start_internal_data_builder(current_asmdata.AsmLists[al_const],sec_rodata,_class.vmt_mangledname,lists.pubmethodstcb,lab);
+              tcb.start_internal_data_builder(current_asmdata.AsmLists[al_const],sec_data,_class.vmt_mangledname,lists.pubmethodstcb,lab);
               get_tabledef(itp_vmt_intern_tmethodnametable,u32inttype,lists.methodnamerec,count,packrecords,pubmethodsdef,pubmethodsarraydef);
               { begin record encompassing the tmethodnametable and the extended method table }
               lists.pubmethodstcb.begin_anonymous_record('',packrecords,
@@ -627,7 +627,7 @@ implementation
             { generate the class table }
             if classtablelist.count>0 then
               begin
-                tcb.start_internal_data_builder(current_asmdata.AsmLists[al_const],sec_rodata,_class.vmt_mangledname,datatcb,classtable);
+                tcb.start_internal_data_builder(current_asmdata.AsmLists[al_const],sec_data,_class.vmt_mangledname,datatcb,classtable);
                 datatcb.begin_anonymous_record('$fpc_intern_classtable_'+tostr(classtablelist.Count-1),
                   packrecords,1,
                   targetinfos[target_info.system]^.alignment.recordalignmin);
@@ -658,7 +658,7 @@ implementation
                 Fields: array[0..0] of TFieldInfo
               end;
             }
-            tcb.start_internal_data_builder(current_asmdata.AsmLists[al_const],sec_rodata,_class.vmt_mangledname,datatcb,lab);
+            tcb.start_internal_data_builder(current_asmdata.AsmLists[al_const],sec_data,_class.vmt_mangledname,datatcb,lab);
             { can't easily specify a name here for reuse of the constructed def,
               since it's full of variable length shortstrings (-> all of those
               lengths and their order would have to incorporated in the name,
@@ -757,7 +757,7 @@ implementation
         hs : TSymStr;
         i  : longint;
       begin
-        tcb.start_internal_data_builder(current_asmdata.AsmLists[al_const],sec_rodata,'',datatcb,fintfvtablelabels[intfindex]);
+        tcb.start_internal_data_builder(current_asmdata.AsmLists[al_const],sec_data,'',datatcb,fintfvtablelabels[intfindex]);
         datatcb.begin_anonymous_record('',0,1,
           targetinfos[target_info.system]^.alignment.recordalignmin);
         if assigned(AImplIntf.procdefs) then
@@ -879,7 +879,7 @@ implementation
               fintfvtablelabels[i]:=fintfvtablelabels[_class.ImplementedInterfaces.IndexOf(ImplIntf.VtblImplIntf)];
           end;
 
-        tcb.start_internal_data_builder(current_asmdata.AsmLists[al_const],sec_rodata,_class.vmt_mangledname,datatcb,lab);
+        tcb.start_internal_data_builder(current_asmdata.AsmLists[al_const],sec_data,_class.vmt_mangledname,datatcb,lab);
         datatcb.begin_anonymous_record('',default_settings.packrecords,1,
           targetinfos[target_info.system]^.alignment.recordalignmin);
         datatcb.emit_tai(Tai_const.Create_sizeint(_class.ImplementedInterfaces.count),sizeuinttype);
@@ -920,7 +920,7 @@ implementation
           list.concatlist(tcb.get_final_asmlist(
             sym,
             rec_tguid,
-            sec_rodata,
+            sec_data,
             s,
             sizeof(pint)));
           tcb.free;
@@ -934,7 +934,7 @@ implementation
       list.concatlist(tcb.get_final_asmlist(
         sym,
         def,
-        sec_rodata,
+        sec_data,
         s,
         sizeof(pint)));
       tcb.free;
@@ -1096,7 +1096,7 @@ implementation
          if is_class(_class) then
           begin
             { write class name }
-            tcb.start_internal_data_builder(current_asmdata.asmlists[al_const],sec_rodata,_class.vmt_mangledname,datatcb,classnamelabel);
+            tcb.start_internal_data_builder(current_asmdata.asmlists[al_const],sec_data,_class.vmt_mangledname,datatcb,classnamelabel);
             classnamedef:=datatcb.emit_shortstring_const(_class.RttiName);
             tcb.finish_internal_data_builder(datatcb,classnamelabel,classnamedef,sizeof(pint));
 
@@ -1231,7 +1231,7 @@ implementation
          current_asmdata.asmlists[al_globals].concatlist(
            tcb.get_final_asmlist(
              sym,
-             vmtdef,sec_rodata,_class.vmt_mangledname,sizeof(pint)
+             vmtdef,sec_data,_class.vmt_mangledname,sizeof(pint)
            )
          );
          tcb.free;

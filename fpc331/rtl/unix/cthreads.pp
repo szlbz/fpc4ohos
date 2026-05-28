@@ -43,7 +43,7 @@
 {$endif}
 {$endif}
 
-{$if defined(linux) or defined(aix) or defined(android)}
+{$if defined(linux) or defined(aix) or defined(android) or defined(ohos)}
 {$define has_sem_timedwait}
 {$endif}
 
@@ -506,10 +506,10 @@ Type  PINTRTLEvent = ^TINTRTLEvent;
   function  CKillThread (threadHandle : TThreadID) : dword;
     begin
       pthread_detach(pthread_t(threadHandle));
-{$ifndef android}
-      CKillThread := pthread_cancel(pthread_t(threadHandle));
-{$else}
+{$if defined(android) or defined(ohos)}
       CKillThread := dword(-1);
+{$else}
+      CKillThread := pthread_cancel(pthread_t(threadHandle));
 {$endif}
     end;
 
@@ -547,12 +547,12 @@ Type  PINTRTLEvent = ^TINTRTLEvent;
 
 
   procedure CSetThreadDebugNameA(threadHandle: TThreadID; const ThreadName: AnsiString);
-{$if defined(Linux) or defined(Android)}
+{$if defined(Linux) or defined(Android) or defined(ohos)}
     var
       CuttedName: AnsiString;
 {$endif}
     begin
-{$if defined(Linux) or defined(Android)}
+{$if defined(Linux) or defined(Android) or defined(ohos)}
       if ThreadName = '' then
         Exit;
   {$ifdef dynpthreads}
@@ -1099,5 +1099,9 @@ initialization
       runerror(211);
     end;
   SetCThreadManager;
+  { Initialize TLS early to avoid recursion in CRelocateThreadvar
+    during unit initialization }
+  if not TLSInitialized then
+    InitCTLS;
 finalization
 end.

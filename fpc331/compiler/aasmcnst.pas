@@ -1065,18 +1065,15 @@ implementation
            ptrdef:=cpointerdef.getreusable(def);
            symind:=current_asmdata.DefineAsmSymbol(sym.name,AB_INDIRECT,AT_DATA,ptrdef);
            { reuse the section if possible }
-           if section=sec_rodata then
-             indsecname:=secname
-           else
-             indsecname:=lower(symind.name);
-           indtcb:=ctai_typedconstbuilder.create([tcalo_new_section,tcalo_make_dead_strippable]);
-           indtcb.emit_tai(tai_const.create_sym_offset(sym,0),ptrdef);
-           current_asmdata.asmlists[al_indirectglobals].concatlist(indtcb.get_final_asmlist(
-             symind,
-             ptrdef,
-             sec_rodata,
-             indsecname,
-             ptrdef.alignment));
+            indsecname:=lower(symind.name);
+            indtcb:=ctai_typedconstbuilder.create([tcalo_new_section,tcalo_make_dead_strippable]);
+            indtcb.emit_tai(tai_const.create_sym_offset(sym,0),ptrdef);
+            current_asmdata.asmlists[al_indirectglobals].concatlist(indtcb.get_final_asmlist(
+              symind,
+              ptrdef,
+              sec_data,
+              indsecname,
+              ptrdef.alignment));
 
            symind.increfs;
 

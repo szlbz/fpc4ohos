@@ -259,7 +259,8 @@ interface
        system_any = system_none;
 
        systems_wince = [system_arm_wince,system_i386_wince];
-       systems_android = [system_arm_android, system_aarch64_android, system_i386_android, system_x86_64_android, system_mipsel_android];
+        systems_android = [system_arm_android, system_aarch64_android, system_i386_android, system_x86_64_android, system_mipsel_android];
+        systems_harmonyos = [system_arm_harmonyos, system_aarch64_harmonyos, system_x86_64_harmonyos];
        systems_linux = [system_i386_linux,system_x86_64_linux,system_powerpc_linux,system_powerpc64_linux,
                        system_arm_linux,system_sparc_linux,system_sparc64_linux,system_m68k_linux,
                        system_x86_6432_linux,system_mipseb_linux,system_mipsel_linux,system_aarch64_linux,
@@ -378,7 +379,7 @@ interface
                                          system_arm_wince,
                                          system_x86_64_win64,
                                          system_i8086_win16,
-                                         system_aarch64_win64]+systems_linux+systems_android+systems_wasm;
+                                          system_aarch64_win64]+systems_linux+systems_android+systems_harmonyos+systems_wasm;
 
        { all systems that reference symbols in other binaries using indirect imports }
        systems_indirect_var_imports = systems_all_windows+[system_i386_nativent];
@@ -389,8 +390,8 @@ interface
                                             system_aarch64_win64,system_loongarch64_linux];
 
        { all systems for which weak linking has been tested/is supported }
-       systems_weak_linking = systems_darwin + systems_solaris + systems_linux + systems_android + systems_bsd +
-                              [system_m68k_sinclairql];
+        systems_weak_linking = systems_darwin + systems_solaris + systems_linux + systems_android + systems_harmonyos + systems_bsd +
+                               [system_m68k_sinclairql];
 
        systems_internal_sysinit = [system_i386_win32,system_x86_64_win64,
                                    system_i386_linux,system_powerpc64_linux,system_sparc64_linux,system_x86_64_linux,
@@ -464,8 +465,8 @@ interface
          and can never work for libc-based targets or any other program
          linking to an external library)
        }
-       systems_support_checkpointer = systems_linux
-                             + [system_i386_win32]
+        systems_support_checkpointer = systems_linux + systems_harmonyos
+                              + [system_i386_win32]
                              + [system_i386_GO32V2]
                              + [system_i386_os2]
                              + [system_i386_beos,system_i386_haiku]
@@ -935,10 +936,14 @@ begin
     default_target(source_info.system);
     {$define default_target_set}
   {$else cpui386}
-   {$ifdef linux}
-    default_target(system_i386_linux);
-    {$define default_target_set}
-   {$endif}
+    {$ifdef linux}
+      default_target(system_arm_linux);
+      {$define default_target_set}
+    {$endif}
+    {$ifdef ohos}
+      {$define default_target_set}
+      default_target(system_arm_harmonyos);
+    {$endif}
    {$ifdef MSWindows}
     default_target(system_i386_win32);
     {$define default_target_set}
@@ -1003,10 +1008,14 @@ begin
     default_target(system_x86_64_netbsd);
     {$define default_target_set}
    {$endif}
-   {$ifdef solaris}
-    default_target(system_x86_64_solaris);
-    {$define default_target_set}
-   {$endif}
+    {$ifdef solaris}
+     default_target(system_x86_64_solaris);
+     {$define default_target_set}
+    {$endif}
+    {$ifdef ohos}
+     default_target(system_x86_64_harmonyos);
+     {$define default_target_set}
+    {$endif}
    {$ifdef darwin}
     default_target(system_x86_64_darwin);
     {$define default_target_set}
@@ -1183,6 +1192,10 @@ begin
       {$define default_target_set}
       default_target(system_aarch64_android);
     {$endif android}
+    {$ifdef ohos}
+      {$define default_target_set}
+      default_target(system_aarch64_harmonyos);
+    {$endif ohos}
     {$ifdef windows}
       {$define default_target_set}
       default_target(system_aarch64_win64);

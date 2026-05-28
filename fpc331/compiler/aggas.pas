@@ -386,7 +386,7 @@ implementation
           secname:='.rodata';
 
         { Use .rodata and .data.rel.ro for Android with PIC }
-        if (target_info.system in systems_android) and (cs_create_pic in current_settings.moduleswitches) then
+        if (target_info.system in (systems_android+systems_harmonyos)) and (cs_create_pic in current_settings.moduleswitches) then
           begin
             case atype of
               sec_rodata:
@@ -2049,7 +2049,7 @@ implementation
 
       { "no executable stack" marker }
       { TODO: used by OpenBSD/NetBSD as well? }
-      if (target_info.system in (systems_linux + systems_android + systems_freebsd + systems_dragonfly)) and
+      if (target_info.system in (systems_linux + systems_android + systems_harmonyos + systems_freebsd + systems_dragonfly)) and
          not(cs_executable_stack in current_settings.moduleswitches) then
         begin
           writer.AsmWriteLn('.section .note.GNU-stack,"",%progbits');

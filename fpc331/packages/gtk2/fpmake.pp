@@ -18,7 +18,7 @@ begin
 {$endif ALLPACKAGES}
     P.Version:='3.3.1';
     P.SupportBuildModes := [bmOneByOne];
-    P.OSes:=AllUnixOSes+[Win32,Win64]-[darwin,iphonesim,ios];
+    P.OSes:=AllUnixOSes+[Win32,Win64]-[darwin,iphonesim,ios,ohos];
     if Defaults.CPU=jvm then
       P.OSes := P.OSes - [android];
     if Defaults.CPU<>arm then

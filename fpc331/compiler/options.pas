@@ -196,7 +196,7 @@ const
                         + [system_aarch64_linux];
 
 
-  suppported_targets_x_smallr = systems_linux + systems_solaris + systems_android
+  suppported_targets_x_smallr = systems_linux + systems_solaris + systems_android + systems_harmonyos
                              + systems_openbsd
                              + [system_i386_haiku,system_x86_64_haiku]
                              + [system_i386_beos]
@@ -2218,8 +2218,8 @@ begin
   end;
 
   { monitor support? }
-  if not(target_info.system in systems_aix+systems_bsd+systems_linux+systems_android+
-    systems_nativent+systems_solaris+systems_wasm+systems_all_windows-[system_i8086_win16]+systems_darwin) then
+if not(target_info.system in systems_aix+systems_bsd+systems_linux+systems_android+systems_harmonyos+
+  systems_nativent+systems_solaris+systems_wasm+systems_all_windows-[system_i8086_win16]+systems_darwin) then
     Include(target_unsup_features,f_monitor);
 
   if def then
@@ -5022,6 +5022,19 @@ begin
         utilsprefix:='i686-linux-android-';
       else
         utilsprefix:=target_cpu_string + '-linux-android-';
+    end;
+
+  { Use standard HarmonyOS NDK prefixes when cross-compiling }
+  if (source_info.system<>target_info.system) and (target_info.system in systems_harmonyos) then
+    case target_info.system of
+      system_arm_harmonyos:
+        utilsprefix:='arm-linux-ohos-';
+      system_aarch64_harmonyos:
+        utilsprefix:='aarch64-linux-ohos-';
+      system_x86_64_harmonyos:
+        utilsprefix:='x86_64-linux-ohos-';
+    else  // ??????
+      utilsprefix:=''; 
     end;
 
   { Set up default value for the heap on Amiga-likes (values only apply if the OSHeap allocator is used) }

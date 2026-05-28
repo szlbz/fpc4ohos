@@ -47,6 +47,9 @@ implementation
     {$ifndef NOTARGETANDROID}
       ,t_android
     {$endif}
+    {$ifndef NOTARGETHARMONYOS}
+      ,t_harmonyos
+    {$endif}
     {$ifndef NOTARGETWIN64}
       ,t_win
     {$endif}

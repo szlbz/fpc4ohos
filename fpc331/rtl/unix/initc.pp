@@ -62,6 +62,10 @@ end;
 function geterrnolocation: pcint; cdecl;external clib name '__errno_location';
 {$endif}
 
+{$if defined(ohos)}
+function geterrnolocation: pcint; cdecl;external clib name '__errno_location';
+{$endif}
+
 {$if defined(Android)} // look at exported symbols in libc.so
 function geterrnolocation: pcint; cdecl;external clib name '__errno';
 {$endif}

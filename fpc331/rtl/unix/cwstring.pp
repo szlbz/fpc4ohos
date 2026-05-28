@@ -32,7 +32,8 @@ implementation
 {$linklib c}
 
 // Linux (and maybe glibc platforms in general), have iconv in glibc.
-{$if defined(linux) or defined(solaris)}
+// HarmonyOS (ohos) also provides iconv functions inside libc.
+{$if defined(linux) or defined(solaris) or defined(ohos)}
   {$define iconv_is_in_libc}
 {$endif}
 
@@ -137,6 +138,12 @@ function mblen(const s: PAnsiChar; n: size_t): size_t; cdecl; external clib name
 
 const
 {$if defined(linux)}
+  __LC_CTYPE = 0;
+  LC_ALL = 6;
+  _NL_CTYPE_CLASS = (__LC_CTYPE shl 16);
+  _NL_CTYPE_CODESET_NAME = (_NL_CTYPE_CLASS)+14;
+  CODESET = _NL_CTYPE_CODESET_NAME;
+{$elseif defined(ohos)}
   __LC_CTYPE = 0;
   LC_ALL = 6;
   _NL_CTYPE_CLASS = (__LC_CTYPE shl 16);

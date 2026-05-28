@@ -97,6 +97,9 @@ uses
 {$ifdef haiku}
   ,i_haiku
 {$endif haiku}
+{$ifdef ohos}
+  ,i_harmonyos
+{$endif ohos}
 {$ifdef human68k}
   ,i_human68k
 {$endif human68k}

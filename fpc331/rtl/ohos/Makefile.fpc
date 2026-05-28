@@ -1,0 +1,210 @@
+#
+#   Makefile.fpc for Free Pascal HarmonyOS RTL
+#
+
+[package]
+main=rtl
+
+[target]
+loaders=$(LOADERS)
+units=$(SYSTEMUNIT) $(SYSINIT_UNITS) \
+      $(UUCHARUNIT) $(UNIXTYPEUNIT) $(CTYPESUNIT) $(BASEUNIXUNIT) $(STRINGSUNIT) $(OBJPASUNIT) \
+      $(FPINTRESUNIT) $(HEAPTRCUNIT) $(LINEINFOUNIT) $(LNFODWRFUNIT) \
+      $(TERMIOUNIT) $(UNIXUNIT) $(LINUXUNIT) $(INITCUNIT) $(CMEMUNIT) $(CPU_UNITS) \
+      $(LINUXVCSUNIT) \
+      $(ERRORSUNIT) $(DLUNIT) $(DYNLIBSUNIT) \
+      $(SYSCONSTUNIT) \
+      $(UNIXUTILUNIT) $(SYSCALLUNIT) \
+      $(SYSUTILSUNIT) $(TYPINFOUNIT) $(MATHUNIT) $(TYPESUNIT) \
+      $(MACPASUNIT) $(ISO7185UNIT) \
+      $(DOSUNIT) $(EXTPASUNIT) \
+      $(CHARSETUNIT) $(CPALLUNIT) $(CHARACTERUNIT) \
+      $(GETOPTSUNIT) \
+      $(CTHREADSUNIT) $(SORTBASEUNIT) $(CLASSESUNIT) $(FGLUNIT)  \
+      $(RTLCONSTSUNIT) $(CWSTRINGUNIT) $(FPCYLIXUNIT) $(UNIXCPUNIT) $(FPWIDESTRINGUNIT) \
+      $(SOFTFPUUNIT) $(SFPUX80UNIT) $(UFLOATX80UNIT) $(SFPU128UNIT) $(UFLOAT128UNIT)
+implicitunits=$(EXEINFOUNIT) $(CP_UNITS) $(UNICODEDATAUNIT)
+rsts=$(MATHUNIT)  $(TYPINFOUNIT)  $(SYSCONSTUNIT) $(RTLCONSTSUNIT) $(UNICODEDATAUNIT)
+
+[require]
+nortl=y
+
+[clean]
+units=$(LINUXUNIT)
+
+[install]
+fpcpackage=y
+
+[default]
+target=ohos
+
+[compiler]
+includedir=$(INC) $(PROCINC) $(UNIXINC) $(ARCH) $(RTL)/ohos $(LINUXINC) $(OSPROCINC) $(LINUXINC)/$(ARCH) $(OBJPASDIR) $(OBJPASDIR)/sysutils $(OBJPASDIR)/classes $(CLASSESDIR) $(UNIXINC)
+sourcedir=$(INC) $(PROCINC) $(UNIXINC) $(ARCH) $(COMMON) $(RTL)/ohos $(LINUXINC) $(LINUXINC)/$(ARCH) $(OBJPASDIR) $(OBJPASDIR)/sysutils $(OBJPASDIR)/classes $(CLASSESDIR) $(UNIXINC) $(RTL)/charmaps
+targetdir=.
+options=-Sg -Cg
+
+[shared]
+libunits=$(SYSTEMUNIT) $(OBJPASUNIT) $(STRINGSUNIT) $(DOSUNIT) \
+      $(UNIXUNIT) $(BASEUNIXUNIT) $(UNIXTYPEUNIT) $(UNIXUTILUNIT) \
+      $(SYSUTILSUNIT) $(TYPINFOUNIT) $(MATHUNIT) \
+      $(CPU_UNITS) $(GETOPTSUNIT) \
+      $(ERRORSUNIT) \
+      $(SORTBASEUNIT) $(CLASSESUNIT) $(FGLUNIT) $(SYSCONSTUNIT) $(RTLCONSTSUNIT)
+
+[prerules]
+RTL=..
+INC=$(RTL)/inc
+COMMON=$(RTL)/common
+PROCINC=$(RTL)/$(ARCH)
+UNIXINC=$(RTL)/unix
+OSPROCINC=$(RTL)/ohos/$(CPU_TARGET)
+LINUXINC=$(RTL)/linux
+CLASSESDIR=$(UNIXINC)
+DYNLIBS_DEPS_OS=$(DLUNIT)$(PPUEXT)
+DYNLIBSINCDIR=$(UNIXINC)
+# dladdr() is provided by system libdl on ohos, no Android workaround needed
+
+TERMIODIR=$(LINUXINC)
+PTHREADINCDIR=$(LINUXINC)
+PTYPESINCDIR=$(LINUXINC)
+UNXINC=$(LINUXINC)
+
+# OHOS has its own system.pp with OHOS-specific initialization (sysoshimp.inc)
+SYSTEMDIR = $(RTL)/ohos
+SYSCALL_DEPS_OS=$(LINUXINC)/$(ARCH)/syscallh.inc $(LINUXINC)/$(ARCH)/sysnr.inc
+SYSUTILS_DEPS_OS=$(DLUNIT)$(PPUEXT) $(UNIXUNIT)$(PPUEXT) $(ERRORSUNIT)$(PPUEXT)
+SYSUTILSDIR=$(UNIXINC)
+
+CWSTRINGDIR=$(OSDIR)
+
+UNITPREFIX=rtl
+
+CPU_UNITS=
+SYSINIT_UNITS=
+
+# Unit name definitions
+SYSTEMUNIT=system
+OBJPASUNIT=objpas
+RTLCONSTUNIT=rtlconst
+SYSCONSTUNIT=sysconst
+UNIXTYPEUNIT=unixtype
+ERRORSUNIT=errors
+STRINGSUNIT=strings
+GETOPTSUNIT=getopts
+SORTBASEUNIT=sortbase
+EXEINFOUNIT=exeinfo
+CTYPESUNIT=ctypes
+CMEMUNIT=cmem
+CHARSETUNIT=charset
+HEAPTRCUNIT=heaptrc
+FPINTRESUNIT=fpintres
+LINEINFOUNIT=lineinfo
+LNFODWRFUNIT=lnfodwrf
+ISO7185UNIT=iso7185
+INTRINSICSUNIT=intrinsics
+CPUUNIT=cpu
+SOFTFPUUNIT=softfpu
+SFPUX80UNIT=sfpux80
+SFPU128UNIT=sfpu128
+UFLOATX80UNIT=ufloatx80
+UFLOAT128UNIT=ufloat128
+NOTHREADSUNIT=nothreads
+UUCHARUNIT=uuchar
+UACHARUNIT=uachar
+EXTPASUNIT=extpas
+SYSCALLUNIT=syscall
+UNIXUTILUNIT=unixutil
+PORTSUNIT=ports
+UNIX98PTYUNIT=unix98pty
+DLUNIT=dl
+BASEUNIXUNIT=baseunix
+DOSUNIT=dos
+UNIXUNIT=unix
+UNIXCPUNIT=unixcp
+CTHREADSUNIT=cthreads
+TYPINFOUNIT=typinfo
+FGLUNIT=fgl
+RTLCONSTSUNIT=rtlconsts
+MACPASUNIT=macpas
+SYSUTILSUNIT=sysutils
+TYPESUNIT=types
+MATHUNIT=math
+FPWIDESTRINGUNIT=fpwidestring
+CLASSESUNIT=classes
+CWSTRINGUNIT=cwstring
+FPCYLIXUNIT=
+INITCUNIT=initc
+TERMIOUNIT=termio
+LINUXUNIT=
+LINUXVCSUNIT=
+CPALLUNIT=cpall
+CHARACTERUNIT=character
+DYNLIBSUNIT=dynlibs
+CP_UNITS=
+UNICODEDATAUNIT=unicodedata
+
+LOADERS=prt0 dllprt0
+
+ifeq ($(findstring $(ARCH),i386 x86_64 arm),$(ARCH))
+CPU_UNITS=$(CPUUNIT)
+endif
+ifeq ($(ARCH),x86_64)
+CPU_UNITS+=$(INTRINSICSUNIT)
+endif
+ifeq ($(ARCH),i386)
+CPU_UNITS+=$(MMXUNIT) $(INTRINSICSUNIT)
+endif
+ifeq ($(ARCH),aarch64)
+CPU_UNITS+=$(INTRINSICSUNIT)
+endif
+ifeq ($(ARCH),arm)
+CPU_UNITS+=$(INTRINSICSUNIT)
+endif
+
+# Causes release PPU files not to be recompiled
+ifdef RELEASE
+override FPCOPT+=-Ur
+endif
+
+# Paths
+OBJPASDIR=$(RTL)/objpas
+
+[rules]
+.NOTPARALLEL:
+# Get the $(SYSTEMUNIT) independent include file names.
+include $(INC)/makefile.inc
+SYSINCDEPS=$(addprefix $(INC)/,$(SYSINCNAMES))
+SYSINCDEPS:=$(SYSINCDEPS) sysohos.inc sysoshimp.inc sysosh.inc sysos.inc
+
+# Get the processor dependent include file names.
+include $(PROCINC)/makefile.cpu
+SYSCPUDEPS=$(addprefix $(PROCINC)/,$(CPUINCNAMES))
+
+# Put $(SYSTEMUNIT) unit dependencies together.
+SYSDEPS=$(SYSINCDEPS) $(SYSCPUDEPS)
+
+# Select 32/64 mode
+ifeq ($(ARCH),i386)
+  ASTARGET=--32
+endif
+
+ifeq ($(ARCH),mipsel)
+  ASTARGET=-mips32 -KPIC
+endif
+
+ifneq ($(findstring $(ARCH),aarch64 x86_64),)
+  CPUBITS=64
+else
+  CPUBITS=32
+endif
+
+#
+# Loaders
+#
+
+prt0$(OEXT) : prt0.as
+        $(AS) $(ASTARGET) --target=$(ARCH)-linux-ohos -o $(UNITTARGETDIRPREFIX)prt0$(OEXT) prt0.as
+
+dllprt0$(OEXT) : dllprt0.as
+        $(AS) $(ASTARGET) --target=$(ARCH)-linux-ohos -o $(UNITTARGETDIRPREFIX)dllprt0$(OEXT) dllprt0.as

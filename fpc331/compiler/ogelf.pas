@@ -1069,8 +1069,8 @@ implementation
            shstrtabsect:=TElfObjSection.create_ext(data,'.shstrtab',SHT_STRTAB,0,1,0);
            { "no executable stack" marker }
            { TODO: used by OpenBSD/NetBSD as well? }
-           if (target_info.system in (systems_linux + systems_android + systems_freebsd + systems_dragonfly)) and
-              not(cs_executable_stack in current_settings.moduleswitches) then
+            if (target_info.system in (systems_linux + systems_android + systems_harmonyos + systems_freebsd + systems_dragonfly)) and
+               not(cs_executable_stack in current_settings.moduleswitches) then
              TElfObjSection.create_ext(data,'.note.GNU-stack',SHT_PROGBITS,0,1,0);
            { symbol for filename }
            symtabsect.fstrsec.writestr(ExtractFileName(current_module.mainsource));

@@ -10,7 +10,7 @@ procedure add_rtl_objpas(const ADirectory: string);
 Const
   // All Unixes have full set of KVM+Crt in unix/ except QNX which is not
   // in workable state atm.
-  UnixLikes = AllUnixOSes -[QNX]; // qnx never was active in 2.x afaik
+  UnixLikes = AllUnixOSes -[QNX] + [ohos]; // qnx never was active in 2.x afaik
 
 //  AllUnixOSes  = [Linux,FreeBSD,NetBSD,OpenBSD,Darwin,QNX,BeOS,Solaris,Haiku,iphonesim,ios,aix,Android];
 //    unixlikes-[beos];

@@ -71,7 +71,7 @@ function TAsmDataDef.DefineAsmSymbolByClass(symclass: TAsmSymbolClass; const s: 
         tcb.emit_tai(Tai_const.Create_sym_offset(result,0),ptrdef);
         current_asmdata.AsmLists[al_indirectglobals].concatlist(tcb.get_final_asmlist(
           symind,ptrdef,
-          sec_rodata,
+          sec_data,
           lower(symind.name),
           ptrdef.alignment));
         tcb.free;

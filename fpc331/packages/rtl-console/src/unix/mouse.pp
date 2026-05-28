@@ -22,7 +22,7 @@ interface
 {$define NOMOUSE}
 {$endif}
 
-{$if defined(darwin) or defined(haiku) or defined(beos) or defined(bsd)}
+{$if defined(darwin) or defined(haiku) or defined(beos) or defined(bsd) or defined(ohos)}
 {$define NOGPM}
 {$endif}
 

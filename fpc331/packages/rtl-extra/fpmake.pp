@@ -10,7 +10,7 @@ procedure add_rtl_extra(const ADirectory: string);
 Const
   // All Unixes have full set of KVM+Crt in unix/ except QNX which is not
   // in workable state atm.
-  UnixLikes = AllUnixOSes -[QNX]; // qnx never was active in 2.x afaik
+  UnixLikes = AllUnixOSes -[QNX] + [ohos]; // qnx never was active in 2.x afaik
 
   ClocaleOSes   = UnixLikes -[android];
   CLocaleIncOSes= [Aix,freebsd,netbsd,openbsd,solaris,darwin,iphonesim,ios,dragonfly];
@@ -173,4 +173,5 @@ begin
   Installer.Run;
 end.
 {$endif ALLPACKAGES}
+
 
