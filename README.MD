@@ -5,8 +5,9 @@
 | fpc | 已支持鸿蒙OS Target的fpcmake及ppcx64 |
 | fpc331| FPC3.3.1 patchs |
 | lazarus | Lazarus IDE 编译配置 |
-| LazarusOHOS_Wrapper | 鸿蒙调用QT工程，该QT工程负责调用Lazarus编译的.so（Wrapper） |
 | Lazarus_QT_Project | Lazarus Build to HarmonyOS 的示例工程 |
+| LazarusOHOS_Wrapper | 鸿蒙调用QT工程，该QT工程负责调用Lazarus编译的.so（Wrapper） |
+| libQt5Pas | 编译适用于 HarmonyOS 的 Pascal-Qt 接口库libQt5Pas.so |
 | OHOS_HAP_Project | 鸿蒙HAP工程，该工程执行 Wrapper 调用 Lazarus 工程 |
 
 ---
@@ -24,6 +25,10 @@
 通过 fpcupdeluxe 安装 lazarus (版本可选stable)
 
 按照本项目 lazarus 目录下的 README.MD 说明，为 Lazarus 增加 OHOS 鸿蒙系统编译选项
+
+---
+
+基于Qt for harmonyOS 编译libQt5Pas.so
 
 ---
 
