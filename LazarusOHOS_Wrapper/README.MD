@@ -1,4 +1,4 @@
-# FPC for HarmonyOS 
+# Qt5 应用入口桥接库 
 
 https://wiki.qt.io/Qt_for_HarmonyOS/zh
 
