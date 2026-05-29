@@ -42,3 +42,9 @@ make clean all install INSTALL_PREFIX=%FPCBASE%\fpc FPC=ppcx64
 REM 编译交叉 FPC + OHOS RTL（win64 → ohos）：交叉编译器（ppcrossx64.exe） + 交叉 RTL（x86_64-ohos）
 make crossinstall OS_TARGET=ohos CPU_TARGET=x86_64 FPC=ppcx64 CROSSINSTALL=1 OPT="-O- -fPIC -O2" CROSSOPT=" -O- -Sg -Cg -O2 -Ur -dohos -Fl%SYSROOT%/usr/lib -k--sysroot=%SYSROOT%" INSTALL_PREFIX=%FPCBASE%\fpc AS="%LLVMDIR%/bin/clang.exe -c -x assembler --sysroot=%SYSROOT%" BINUTILSPREFIX=%LLVMDIR%/bin/llvm-
 
+REM for Win64
+copy /y "%LLVMDIR%\bin\ld.lld.exe"  "%FPCBASE%\fpc\bin\x86_64-win64\llvm-ld.exe"
+copy /y "%LLVMDIR%\bin\llvm-ar.exe"  "%FPCBASE%\fpc\bin\x86_64-win64\llvm-ar.exe"
+copy /y "%LLVMDIR%\bin\llvm-nm.exe"  "%FPCBASE%\fpc\bin\x86_64-win64\llvm-nm.exe"
+copy /y "%LLVMDIR%\bin\llvm-objdump.exe"  "%FPCBASE%\fpc\bin\x86_64-win64\llvm-objdump.exe"
+
