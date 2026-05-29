@@ -20,7 +20,7 @@ cd build
 fpcmake.exe -Tall -w
 copy /y MakeFile MakeFile.pkg
 cd ..
-regenmakefiles.sh
+call regenmakefiles.bat
 cd ..
 cd utils
 fpcmake.exe -Tall -w
