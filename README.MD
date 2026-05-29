@@ -12,25 +12,55 @@
 
 ---
 
-先通过 fpcupdeluxe 安装 fpc 3.3.1 
+## fpc for harmonyOS
 
-将本项目 fpc 目录下的内容，复制到 fpcupdeluxe\fpc 目录替换原文件
+#### 前提
 
-将本项目 fpc331 目录下的patchs内容，复制到 fpcupdeluxe\fpcsrc 目录替换原文件
+​	先上华为开发者官网下载安装 **`DevEco Studio`**(注意：安装时指定的安装路径中不要包括空格)
 
-进入 fpcsrc 目录执行 build.bat ，构建 FPC 及 RTL
+​	[DevEco Studio-鸿蒙应用集成开发环境（IDE）-华为开发者联盟](https://developer.huawei.com/consumer/cn/deveco-studio/)
+
+#### 安装FPC：
+
+​	先通过 fpcupdeluxe 安装 fpc 3.3.1 
+
+​	将本项目 fpc 目录下的内容，复制到 fpcupdeluxe\fpc 目录替换原文件
+
+​	将本项目 fpc331 目录下的patchs内容，复制到 fpcupdeluxe\fpcsrc 目录替换原文件
+
+​	进入 fpcsrc 目录执行 build.bat ，构建 FPC 及 RTL
 
 ---
 
-通过 fpcupdeluxe 安装 lazarus (版本可选stable)
+#### 安装Lazarus：
 
-按照本项目 lazarus 目录下的 README.MD 说明，为 Lazarus 增加 OHOS 鸿蒙系统编译选项
+​	通过 fpcupdeluxe 安装 lazarus (版本可选stable)
+
+​	按照本项目 lazarus 目录下的 README.MD 说明，为 Lazarus 增加 OHOS 鸿蒙系统编译选项
+
+---
+
+## lazarus build to harmonyOS
+
+#### 前提
+
+​	安装 **`Qt5.12.12`**   [qt.io/download](https://www.qt.io/download)
+
+​	下载 **`Qt for HarmonyOS`**  [Qt5.12.12 Open Source Release for HarmonyOS zh - Qt Wiki](https://wiki.qt.io/Qt5.12.12_Open_Source_Release_for_HarmonyOS_zh)
+
+安装参考：
+
+​	[Qt for HarmonyOS zh - Qt Wiki](https://wiki.qt.io/Qt_for_HarmonyOS_zh)
+
+​	[HarmonyOS鸿蒙PC的QT应用开发：(一、开发环境搭建)](https://blog.csdn.net/qq8864/article/details/159958545)
+
+​	[HarmonyOS鸿蒙PC的QT应用开发：(二、第一个HelloWorld)](https://blog.csdn.net/qq8864/article/details/159968066)
+
+编译出 HarmonyOS 版的 Qt-5.12.12-ohos-{cpuTarget} QT库。
 
 ---
 
-基于Qt for harmonyOS 编译libQt5Pas.so
-
----
+基于Qt for harmonyOS 编译出 libQt5Pas.so
 
 通过 NATIVE_OHOS_SDK 编译出 libLazarusOHOS_Wrapper.so
 
