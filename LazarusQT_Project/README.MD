@@ -45,6 +45,7 @@ uses
 
 procedure InitAndShowForm; cdecl; export;
 begin
+  Application.Scaled := True;
   Application.Initialize;
   Application.CreateForm(TMainWin, MainWin);
   MainWin.Show;
