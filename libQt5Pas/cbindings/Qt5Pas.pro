@@ -778,6 +778,32 @@ SOURCES +=  \
              qnetworkrequest_c.cpp \
              qsslsocket_c.cpp 
 
+# ==========================
+# HarmonyOS 专用配置 开始
+# ==========================
+# 从环境变量读取，缺省用 x86_64
+OHOS_ARCH = $$(OHOS_ARCH)
+isEmpty(OHOS_ARCH) {
+  OHOS_ARCH = x86_64
+}
+
+# sysroot 路径（注意路径分隔符用 /）
+OHOS_SYSROOT = $$(NATIVE_OHOS_SDK)/sysroot
+OHOS_LIBDIR  = $${OHOS_SYSROOT}/usr/lib/$${OHOS_ARCH}-linux-ohos
+OHOS_INCDIR  = $${OHOS_SYSROOT}/usr/include/$${OHOS_ARCH}-linux-ohos
+
+# sysroot - qmake 已经通过 spec 加了
+INCLUDEPATH += $${OHOS_INCDIR}
+LIBS += -L$${OHOS_LIBDIR}
+
+# 必须链接的鸿蒙系统库
+LIBS += -lEGL -lGLESv2 -lnative_window -lc -lm
+
+# 指定架构
+CONFIG += -ohos-arch $${OHOS_ARCH}
+# ==========================
+# HarmonyOS 专用配置 结束
+# ==========================
 }
 
 # end of file
