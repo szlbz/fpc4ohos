@@ -6,7 +6,7 @@
 
 ```
 SET NATIVE_OHOS_SDK=F:/Huawei/DevEcoStudio/sdk/default/openharmony/native
-SET OHOS_ARCH=x86_64   # 或 aarch64 / arm
+SET OHOS_ARCH=x86_64   # 或 aarch64 / arm --> SET OHOS_TARGET_ARCH=arm64-v8a
 
 set QT_OHOS_BIN=F:/Huawei/Qt-5.12.12-ohos-x86/bin
 set TOOLCHAIN=F:/Huawei/DevEcoStudio/sdk/default/openharmony/native/llvm/bin

@@ -786,6 +786,8 @@ OHOS_ARCH = $$(OHOS_ARCH)
 isEmpty(OHOS_ARCH) {
   OHOS_ARCH = x86_64
 }
+QMAKE_CXXFLAGS += --target=$${OHOS_ARCH}-linux-ohos
+QMAKE_LFLAGS += --target=$${OHOS_ARCH}-linux-ohos
 
 # sysroot 路径（注意路径分隔符用 /）
 OHOS_SYSROOT = $$(NATIVE_OHOS_SDK)/sysroot
