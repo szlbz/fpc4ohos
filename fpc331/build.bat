@@ -53,10 +53,10 @@ mklink "%FPCBASE%\fpc\bin\x86_64-win64\llvm-strip.exe" "%LLVMDIR%\bin\llvm-strip
 
 
 REM ππΩ®Ωª≤Ê±‡“Î∆˜
-make compiler_cycle OS_TARGET=ohos CPU_TARGET=aarch64 FPC=ppcx64 CROSSINSTALL=1 OPT="-O- -fPIC -O2" CROSSOPT=" -O- -Sg -Cg -O2 -Ur -dohos -Fl%SYSROOT%/usr/lib -k--sysroot=%SYSROOT%" INSTALL_PREFIX=%FPCBASE%\fpc AS="%LLVMDIR%/bin/clang.exe -c -x assembler --sysroot=%SYSROOT%" BINUTILSPREFIX=llvm-
+make compiler_cycle OS_TARGET=ohos CPU_TARGET=x86_64 FPC=ppcx64 CROSSINSTALL=1 OPT="-O- -fPIC -O2" CROSSOPT=" -O- -Sg -Cg -O2 -Ur -dohos -Fl%SYSROOT%/usr/lib -k--sysroot=%SYSROOT%" INSTALL_PREFIX=%FPCBASE%\fpc AS="%LLVMDIR%/bin/clang.exe -c -x assembler --sysroot=%SYSROOT%" BINUTILSPREFIX=llvm-
  
 REM ±‡“ÎΩª≤Ê FPC + OHOS RTL£®win64 °˙ ohos£©£∫Ωª≤Ê±‡“Î∆˜£®ppcrossx64.exe£© + Ωª≤Ê RTL£®x86_64-ohos£©
-make crossinstall OS_TARGET=ohos CPU_TARGET=aarch64 OPT="-O- -fPIC -O2" CROSSOPT=" -O- -Sg -Cg -O2 -Ur -dohos -Fl%SYSROOT%/usr/lib -k--sysroot=%SYSROOT%" INSTALL_PREFIX=%FPCBASE%\fpc AS="%LLVMDIR%/bin/clang.exe -c -x assembler --sysroot=%SYSROOT%" BINUTILSPREFIX=llvm-
+make crossinstall OS_TARGET=ohos CPU_TARGET=x86_64 OPT="-O- -fPIC -O2" CROSSOPT=" -O- -Sg -Cg -O2 -Ur -dohos -Fl%SYSROOT%/usr/lib -k--sysroot=%SYSROOT%" INSTALL_PREFIX=%FPCBASE%\fpc AS="%LLVMDIR%/bin/clang.exe -c -x assembler --sysroot=%SYSROOT%" BINUTILSPREFIX=llvm-
 
 
 
