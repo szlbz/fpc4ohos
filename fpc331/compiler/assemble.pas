@@ -2357,6 +2357,16 @@ Implementation
             {$pop}
           {$endif}
           {$endif cpuextended}
+{$ifndef cpuextended}
+{$ifndef USE_SOFT_FLOATX80}
+                    aitrealconst_s80bit:
+                      begin
+                        { aarch64/others without native extended: store as float128 }
+                        float128:=tai_realconst(hp).value.s128val;
+                        pdata:=@float128;
+                      end;
+{$endif USE_SOFT_FLOATX80}
+{$endif cpuextended}
                     aitrealconst_s64comp:
                       begin
 {$ifdef FPC_COMP_IS_INT64}
