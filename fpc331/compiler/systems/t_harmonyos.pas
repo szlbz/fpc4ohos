@@ -121,11 +121,20 @@ begin
      ExtDbgCmd[1]:='objcopy --only-keep-debug $EXE $DBG';
      ExtDbgCmd[2]:='objcopy --add-gnu-debuglink=$DBG $EXE';
      ExtDbgCmd[3]:='strip --strip-unneeded $EXE';
-{$ifdef cpu64bitalu}
-     DynamicLinker:='/system/bin/linker64';
-{$else}
-     DynamicLinker:='/system/bin/linker';
-{$endif cpu64bitalu}
+       { OHOS uses musl libc dynamic linker - use target_info for runtime CPU detection }
+      case target_info.cpu of
+        cpu_aarch64:
+          DynamicLinker:='/lib/ld-musl-aarch64.so.1';
+        cpu_riscv64:
+          DynamicLinker:='/lib/ld-musl-riscv64.so.1';
+        cpu_loongarch64:
+          DynamicLinker:='/lib/ld-musl-loongarch64.so.1';
+        cpu_x86_64:
+          DynamicLinker:='/lib/ld-musl-x86_64.so.1';
+        else
+          { fallback: try common 64-bit path }
+          DynamicLinker:='/lib/ld-musl-aarch64.so.1';
+      end;
    end;
 end;
 
@@ -435,5 +444,15 @@ initialization
   RegisterExport(system_x86_64_harmonyos,texportlibharmonyos);
   RegisterTarget(system_x86_64_harmonyos_info);
 {$endif X86_64}
+{$ifdef RISCV64}
+  RegisterImport(system_riscv64_harmonyos,timportlibharmonyos);
+  RegisterExport(system_riscv64_harmonyos,texportlibharmonyos);
+  RegisterTarget(system_riscv64_harmonyos_info);
+{$endif RISCV64}
+{$ifdef LOONGARCH64}
+  RegisterImport(system_loongarch64_harmonyos,timportlibharmonyos);
+  RegisterExport(system_loongarch64_harmonyos,texportlibharmonyos);
+  RegisterTarget(system_loongarch64_harmonyos_info);
+{$endif LOONGARCH64}
   RegisterRes(res_elf_info,TWinLikeResourceFile);
 end.

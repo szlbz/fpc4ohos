@@ -16,7 +16,7 @@
 
 #### 前提
 
-​	先上华为开发者官网下载安装 **`DevEco Studio`**(注意：安装时指定的安装路径中不要包括空格)
+​	先在华为开发者官网下载安装 **`DevEco Studio`**(注意：安装时指定的安装路径中不要包括空格)
 
 ​	[DevEco Studio-鸿蒙应用集成开发环境（IDE）-华为开发者联盟](https://developer.huawei.com/consumer/cn/deveco-studio/)
 
