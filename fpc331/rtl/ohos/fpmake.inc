@@ -20,7 +20,11 @@
           fpmake_add('rtl-ohos','rtl/ohos',target_os,systems_harmonyos,
             {$ifdef cpuarm}CPUARM{$else}
             {$ifdef cpuaarch64}CPUAARCH64{$else}
-            {$ifdef cpux86_64}CPUX86_64{$endif}
+            {$ifdef cpux86_64}CPUX86_64{$else}
+            {$ifdef cpuriscv64}CPURISCV64{$else}
+            {$ifdef cpuloongarch64}CPULOONGARCH64{$endif}
+            {$endif}
+            {$endif}
             {$endif}
             {$endif});
         end;

@@ -54,6 +54,16 @@
   {$define OLDMMAP}
 {$endif}
 
+{$ifdef cpuriscv64}
+  {$define WAIT4}
+  {$define userenameat}
+{$endif}
+
+{$ifdef cpuloongarch64}
+  {$define WAIT4}
+  {$define userenameat}
+{$endif}
+
 {$if not defined(cpux86) and not defined(cpux86_64)}
   {$linklib m}
 {$endif}

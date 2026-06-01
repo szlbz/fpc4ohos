@@ -121,20 +121,11 @@ begin
      ExtDbgCmd[1]:='objcopy --only-keep-debug $EXE $DBG';
      ExtDbgCmd[2]:='objcopy --add-gnu-debuglink=$DBG $EXE';
      ExtDbgCmd[3]:='strip --strip-unneeded $EXE';
-       { OHOS uses musl libc dynamic linker - use target_info for runtime CPU detection }
-      case target_info.cpu of
-        cpu_aarch64:
-          DynamicLinker:='/lib/ld-musl-aarch64.so.1';
-        cpu_riscv64:
-          DynamicLinker:='/lib/ld-musl-riscv64.so.1';
-        cpu_loongarch64:
-          DynamicLinker:='/lib/ld-musl-loongarch64.so.1';
-        cpu_x86_64:
-          DynamicLinker:='/lib/ld-musl-x86_64.so.1';
-        else
-          { fallback: try common 64-bit path }
-          DynamicLinker:='/lib/ld-musl-aarch64.so.1';
-      end;
+{$ifdef cpu64bitalu}
+     DynamicLinker:='/system/bin/linker64';
+{$else}
+     DynamicLinker:='/system/bin/linker';
+{$endif cpu64bitalu}
    end;
 end;
 

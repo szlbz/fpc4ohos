@@ -218,12 +218,14 @@
              system_mipsel_ps1,         { 123 }
              system_wasm32_wasip1threads,{ 124 }
              system_wasm32_wasip2,      { 125 }
-              system_powerpc64_freebsd,  { 126 }
-              { HarmonyOS targets }
-              system_arm_harmonyos,     { 127 }
-              system_aarch64_harmonyos, { 128 }
-              system_x86_64_harmonyos   { 129 }
-        );
+             system_powerpc64_freebsd,  { 126 }
+             { HarmonyOS targets }
+             system_arm_harmonyos,     { 127 }
+             system_aarch64_harmonyos, { 128 }
+             system_x86_64_harmonyos,  { 129 }
+             system_riscv64_harmonyos, { 130 }
+             system_loongarch64_harmonyos { 131 }
+         );
 
      type
        tasm = (as_none

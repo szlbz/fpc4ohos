@@ -146,7 +146,7 @@ UNICODEDATAUNIT=unicodedata
 
 LOADERS=prt0 dllprt0
 
-ifeq ($(findstring $(ARCH),i386 x86_64 arm),$(ARCH))
+ifeq ($(findstring $(ARCH),i386 x86_64 arm riscv64 loongarch64),$(ARCH))
 CPU_UNITS=$(CPUUNIT)
 endif
 ifeq ($(ARCH),x86_64)
@@ -159,6 +159,12 @@ ifeq ($(ARCH),aarch64)
 CPU_UNITS+=$(INTRINSICSUNIT)
 endif
 ifeq ($(ARCH),arm)
+CPU_UNITS+=$(INTRINSICSUNIT)
+endif
+ifeq ($(ARCH),riscv64)
+CPU_UNITS+=$(INTRINSICSUNIT)
+endif
+ifeq ($(ARCH),loongarch64)
 CPU_UNITS+=$(INTRINSICSUNIT)
 endif
 
@@ -193,7 +199,7 @@ ifeq ($(ARCH),mipsel)
   ASTARGET=-mips32 -KPIC
 endif
 
-ifneq ($(findstring $(ARCH),aarch64 x86_64),)
+ifneq ($(findstring $(ARCH),aarch64 x86_64 riscv64 loongarch64),)
   CPUBITS=64
 else
   CPUBITS=32

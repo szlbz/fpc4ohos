@@ -255,7 +255,9 @@ const
   { 126 } 'FreeBSD-powerpc64',
   'HarmonyOS-aarch64',
   'HarmonyOS-arm',
-  'HarmonyOS-x86-64'
+  'HarmonyOS-x86_64',
+  'HarmonyOS-riscv64',
+  'HarmonyOS-loongarch64'
   );
 
 const
