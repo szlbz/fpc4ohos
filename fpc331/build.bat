@@ -1,5 +1,5 @@
 rem 以下修改为你的路径
-SET FPCBASE=lazarus4.6_fpc331
+SET FPCBASE=D:\lazarus4.6_fpc331
 SET OHOS_ARCH=x86_64
 SET NATIVE_OHOS_SDK=F:/Huawei/DevEcoStudio/sdk/default/openharmony/native
 
@@ -44,7 +44,7 @@ REM 编译原生 FPC：原生编译器（ppcx64.exe） + 原生 RTL（x86_64-win64）
 make clean all install INSTALL_PREFIX=%FPCBASE%\fpc FPC=ppcx64
 
 REM 符号链接：需要管理员权限运行
-rem mklink "%FPCBASE%\fpc\bin\x86_64-win64\%OHOS_ARCH%-ohos-as.exe"    "%LLVMDIR%\bin\clang.exe"  
+mklink "%FPCBASE%\fpc\bin\x86_64-win64\%OHOS_ARCH%-ohos-clang.exe"    "%LLVMDIR%\bin\clang.exe" 
 @echo "%LLVMDIR%\bin\clang.exe" -c -x assembler --target=%OHOS_ARCH%-linux-ohos %%* > "%FPCBASE%\fpc\bin\x86_64-win64\%OHOS_ARCH%-ohos-as.bat"
 mklink "%FPCBASE%\fpc\bin\x86_64-win64\%OHOS_ARCH%-ohos-ld.exe"    "%LLVMDIR%\bin\ld.lld.exe" 
 mklink "%FPCBASE%\fpc\bin\x86_64-win64\%OHOS_ARCH%-ohos-ar.exe"    "%LLVMDIR%\bin\llvm-ar.exe"

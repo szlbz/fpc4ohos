@@ -6,18 +6,13 @@
 ```
 #IFDEF cpuamd64 
 #IFDEF ohos 
--XPllvm- 
--FDD:\fpcupdeluxe34_new/fpc/bin/x86_64-win64 
 -FlF:\Huawei\Qt-5.12.12-ohos-x86\lib 
 -FlF:/Huawei/DevEcoStudio/sdk/default/openharmony/native/sysroot/usr/lib/x86_64-linux-ohos 
 -Cg 
--k-LF:/Huawei/DevEcoStudio/sdk/default/openharmony/native/sysroot/usr/lib 
 -k-LF:\Huawei\Qt-5.12.12-ohos-x86\lib 
--k-lQt5Pas
--k-lQt5Core 
--k-lQt5Gui 
--k-lQt5Widgets
+-k-LF:/Huawei/DevEcoStudio/sdk/default/openharmony/native/sysroot/usr/lib 
 -k--sysroot=F:/Huawei/DevEcoStudio/sdk/default/openharmony/native/sysroot 
+-k-lQt5Pas
 #ENDIF 
 #ENDIF 
 ```
