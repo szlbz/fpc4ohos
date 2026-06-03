@@ -146,7 +146,8 @@ UNICODEDATAUNIT=unicodedata
 
 LOADERS=prt0 dllprt0
 
-ifeq ($(findstring $(ARCH),i386 x86_64 arm riscv64 loongarch64),$(ARCH))
+# riscv64/loongarch64 lack cpu.pp, only x86/i386/arm have it
+ifeq ($(findstring $(ARCH),i386 x86_64 arm),$(ARCH))
 CPU_UNITS=$(CPUUNIT)
 endif
 ifeq ($(ARCH),x86_64)
@@ -164,9 +165,10 @@ endif
 ifeq ($(ARCH),riscv64)
 CPU_UNITS+=$(INTRINSICSUNIT)
 endif
-ifeq ($(ARCH),loongarch64)
-CPU_UNITS+=$(INTRINSICSUNIT)
-endif
+# loongarch64 lacks intrinsics.pp, skip for now
+#ifeq ($(ARCH),loongarch64)
+#CPU_UNITS+=$(INTRINSICSUNIT)
+#endif
 
 # Causes release PPU files not to be recompiled
 ifdef RELEASE
@@ -210,7 +212,7 @@ endif
 #
 
 prt0$(OEXT) : prt0.as
-        $(AS) $(ASTARGET) --target=$(ARCH)-linux-ohos -o $(UNITTARGETDIRPREFIX)prt0$(OEXT) prt0.as
+        $(AS) $(ASTARGET)  -o $(UNITTARGETDIRPREFIX)prt0$(OEXT) prt0.as
 
 dllprt0$(OEXT) : dllprt0.as
-        $(AS) $(ASTARGET) --target=$(ARCH)-linux-ohos -o $(UNITTARGETDIRPREFIX)dllprt0$(OEXT) dllprt0.as
+        $(AS) $(ASTARGET)  -o $(UNITTARGETDIRPREFIX)dllprt0$(OEXT) dllprt0.as
