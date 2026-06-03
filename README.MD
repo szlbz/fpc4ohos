@@ -30,6 +30,8 @@
 
 ​	进入 fpcsrc 目录执行 build.bat ，构建 FPC 及 RTL
 
+	注意：在windows下，这里让as.exe构建程序是由{ARCH}-ohos-as.exe去调用{ARCH}-ohos-as.exe.bat，该bat内容最末尾应该是`%*`而不是`%%*`（单独执行build内命令时,有可能会错误的生成2个%%）
+
 ---
 
 #### 安装Lazarus：
