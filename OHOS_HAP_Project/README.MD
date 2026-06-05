@@ -1,3 +1,5 @@
+## Qt5.12.12（ohos-Business）
+
 **获取 DevEco 项目模板**
 
 在以下地址获取最新的用于构建最终 OpenHarmony  Qt 应用程序的 DevEco 项目模板。这将用于在 HarmonyOS 设备上运行 Qt 应用程序。
@@ -11,7 +13,7 @@
 转到文件夹<deveco-project> \entry 并创建子文件夹 \entry\libs\x86_64
 
 将  libQt5Pas.so 
-	libqohos.so 
+	**libqohos.so** 
 	libQt5Core.so 
 	libQt5Gui.so 
 	libQt5Network.so 
@@ -28,3 +30,8 @@
 **构建并运行应用程序**
 
 确保设备已连接。连接后，它应该在 DevEco Studio 模拟器中可见。
+
+---
+---
+
+## *Qt5.15.12（openharmony-Open）*

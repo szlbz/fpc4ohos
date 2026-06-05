@@ -46,7 +46,7 @@ if exist "%PACKAGEDIR%\fpmkunit\Makefile.fpc" (
 )
 
 echo.
-echo ok
+echo ok 
 echo.
 
 exit /b 0

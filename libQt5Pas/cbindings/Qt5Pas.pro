@@ -64,7 +64,7 @@ mac {
   CONFIG += lib_bundle
   }
 
-contains(PLATFORM, BINUX):!ohos_deployment: {
+contains(PLATFORM, BINUX):!ohos_deployment:!openharmony: {
   message("Adding x11extras for XOrg platform.")
   QT += x11extras
 }
@@ -782,7 +782,7 @@ SOURCES +=  \
 # HarmonyOS 专用配置 开始
 # ==========================
 # 从环境变量读取，缺省用 x86_64
-OHOS_ARCH = $$(OHOS_ARCH)
+OHOS_ARCH = $$(OHOS_TARGET_ARCH)
 isEmpty(OHOS_ARCH) {
   OHOS_ARCH = x86_64
 }

@@ -60,6 +60,12 @@
 
 编译出 HarmonyOS 版的 Qt-5.12.12-ohos-{cpuTarget} QT库。
 
+```
+注意：Qt for HarmonyOS分2个不同的版本：
+商业版Qt的QPA插件为`libqohos.so`
+开源版Qt的QPA插件为`libplugins_platforms_qopenharmony.so`
+```
+
 ---
 
 基于Qt for harmonyOS 编译出 libQt5Pas.so

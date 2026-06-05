@@ -122,9 +122,16 @@ begin
      ExtDbgCmd[2]:='objcopy --add-gnu-debuglink=$DBG $EXE';
      ExtDbgCmd[3]:='strip --strip-unneeded $EXE';
 {$ifdef cpu64bitalu}
-     DynamicLinker:='/system/bin/linker64';
+      case target_info.cpu of
+        cpu_arm: DynamicLinker:='/lib/ld-musl-arm.so.1';
+        cpu_aarch64: DynamicLinker:='/lib/ld-musl-aarch64.so.1';
+        cpu_riscv64: DynamicLinker:='/lib/ld-musl-riscv64.so.1';
+        cpu_loongarch64: DynamicLinker:='/lib/ld-musl-loongarch64.so.1';
+        cpu_x86_64: DynamicLinker:='/lib/ld-musl-x86_64.so.1';
+        else DynamicLinker:='/system/bin/linker64';
+      end;
 {$else}
-     DynamicLinker:='/system/bin/linker';
+      DynamicLinker:='/system/bin/linker';
 {$endif cpu64bitalu}
    end;
 end;
