@@ -44,6 +44,7 @@ REM 编译原生 FPC：原生编译器（ppcx64.exe） + 原生 RTL（x86_64-win64）
 make clean all install INSTALL_PREFIX=%FPCBASE%\fpc FPC=ppcx64
 
 REM 符号链接：需要管理员权限运行
+del "%FPCBASE%\fpc\bin\x86_64-win64\%OHOS_ARCH%-ohos-*.*" 
 mklink "%FPCBASE%\fpc\bin\x86_64-win64\%OHOS_ARCH%-ohos-clang.exe" "%LLVMDIR%\bin\clang.exe" 
 //@copy /y batchlauncher.exe "%FPCBASE%\fpc\bin\x86_64-win64\%OHOS_ARCH%-ohos-clang.exe"
 //@echo "%LLVMDIR%\bin\clang.exe" -c -x assembler --target=%OHOS_ARCH%-linux-ohos --sysroot=%SYSROOT% -D__MUSL__ %%* > "%FPCBASE%\fpc\bin\x86_64-win64\%OHOS_ARCH%-ohos-clang.exe.bat"

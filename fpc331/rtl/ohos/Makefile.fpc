@@ -201,6 +201,10 @@ ifeq ($(ARCH),mipsel)
   ASTARGET=-mips32 -KPIC
 endif
 
+ifeq ($(ARCH),loongarch64)
+  ASTARGET=-mabi=lp64d
+endif
+
 ifneq ($(findstring $(ARCH),aarch64 x86_64 riscv64 loongarch64),)
   CPUBITS=64
 else
