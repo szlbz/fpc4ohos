@@ -1,3 +1,7 @@
+```apl
+PS：经测试，DevEcoStudio是可以调用lazarus导出的 main 函数的。意味着该 Wrapper 可以丢弃。
+```
+
 # Qt5 应用入口桥接库 
 
 https://wiki.qt.io/Qt_for_HarmonyOS/zh
