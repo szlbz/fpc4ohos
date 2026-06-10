@@ -7,7 +7,7 @@
 
 typedef void (*InitAndShowFormFunc)();
 
-extern "C" int main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
     // QApplication already exists from libqohos.so, do NOT create one.
     // Load the Lazarus library and find InitAndShowForm symbol.
