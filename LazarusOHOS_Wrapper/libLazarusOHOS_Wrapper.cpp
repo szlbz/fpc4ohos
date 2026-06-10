@@ -2,12 +2,11 @@
 // QApplication is already created by Qt OHOS plugin (libqohos.so)
 // before this library is loaded. Do NOT create another one.
 
-#include <QApplication>
 #include <dlfcn.h>
 
 typedef void (*InitAndShowFormFunc)();
 
-extern "C" int main(int, char**)
+extern "C" int main(int argc, char *argv[])
 {
     // QApplication already exists from libqohos.so, do NOT create one.
     // Load the Lazarus library and find InitAndShowForm symbol.

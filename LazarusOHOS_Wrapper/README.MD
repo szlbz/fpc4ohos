@@ -38,12 +38,8 @@ SET QT5DIR=F:\Huawei\Qt-5.12.12-ohos-x86
 
 %NATIVE_OHOS_SDK%/llvm/bin/clang++ -shared ^
   -o libLazarusOHOS_Wrapper.so ^
-  -I"%QT5DIR%\include" ^
-  -I%QT5DIR%\include\QtWidgets ^
-  -I%QT5DIR%\include\QtGui ^
-  -I%QT5DIR%\include\QtCore ^
   -L"%SYSROOT%/usr/lib/x86_64-linux-ohos" ^
-  -lc -ldl ^
+  -lc ^
   --sysroot="%SYSROOT%" -target x86_64-linux-ohos -fPIC ^
   libLazarusOHOS_Wrapper.cpp 
 ```
