@@ -1,6 +1,7 @@
 // libLazarusOHOS_Wrapper.cpp - HarmonyOS Qt5 + Lazarus LCL wrapper
 // QApplication is already created by Qt OHOS plugin (libqohos.so)
 // before this library is loaded. Do NOT create another one.
+// 不能有 Qt DT_NEEDED
 
 #include <dlfcn.h>
 

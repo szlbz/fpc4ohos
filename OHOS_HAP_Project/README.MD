@@ -35,3 +35,17 @@
 ---
 
 ## *Qt5.15.12（openharmony-Open）*
+
+1.打开DevEco Studio，选择"Create Project"。
+
+2.选择"Native C++"模板，创建好空工程。
+
+3.拷贝QtSDK中openharmony/qtbase目录下的文件夹到DevEco工程中的 entry\src\main\ets 目录下覆盖。
+
+	QtSDK(5.15.1x) 可在 https://gitcode.com/openharmony-sig/qt/releases 下载你需要的版本。
+
+4.修改拷贝到 entry\src\main\ets\entryability 目录下的 EntryAbility.ets 文件，修改加载的.so库如下：
+
+	private launchApplication = "libLazarusOHOS_Wrapper.so" //"libentry.so"
+
+5.确保 entry\src\main\module.json5 文件中，EntryAbility 的 "launchType" 设置为 "specified"（指定实例模式，适用于多窗口）
