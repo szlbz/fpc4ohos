@@ -205,6 +205,14 @@ ifeq ($(ARCH),loongarch64)
   ASTARGET=-mabi=lp64d
 endif
 
+ifeq ($(ARCH),riscv64)
+  ASTARGET=-march=rv64imafdc
+endif
+
+ifeq ($(ARCH),arm)
+  ASTARGET+= -meabi=5
+endif
+
 ifneq ($(findstring $(ARCH),aarch64 x86_64 riscv64 loongarch64),)
   CPUBITS=64
 else
