@@ -1040,10 +1040,10 @@ implementation
                            else
                              writer.AsmWriteln(Tai_datablock(hp).sym.name);
                          end;
-                       if ((target_info.system <> system_arm_linux) and (target_info.system <> system_arm_android)) then
-                         sepChar := '@'
-                       else
-                         sepChar := '%';
+                        if ((target_info.system <> system_arm_linux) and (target_info.system <> system_arm_android) and (target_info.system <> system_arm_harmonyos)) then
+                          sepChar := '@'
+                        else
+                          sepChar := '%';
                        if replaceforbidden then
                          begin
                            if (tf_needs_symbol_type in target_info.flags) then
@@ -1436,11 +1436,11 @@ implementation
                  end
                else
                  begin
-                   if ((target_info.system <> system_arm_linux) and (target_info.system <> system_arm_android)) or
-                     (target_asm.id=as_arm_vasm) then
-                     sepChar := '@'
-                   else
-                     sepChar := '#';
+                    if ((target_info.system <> system_arm_linux) and (target_info.system <> system_arm_android) and (target_info.system <> system_arm_harmonyos)) or
+                      (target_asm.id=as_arm_vasm) then
+                      sepChar := '@'
+                    else
+                      sepChar := '#';
                    if (tf_needs_symbol_type in target_info.flags) then
                      begin
                        writer.AsmWrite(#9'.type'#9 + tai_symbol(hp).sym.name);
@@ -1471,10 +1471,10 @@ implementation
                  { the .localentry directive has to specify the size from the
                    start till here of the non-local entry code as second argument }
                  s:=', .-';
-               if ((target_info.system <> system_arm_linux) and (target_info.system <> system_arm_android)) then
-                 sepChar := '@'
-               else
-                 sepChar := '#';
+                if ((target_info.system <> system_arm_linux) and (target_info.system <> system_arm_android) and (target_info.system <> system_arm_harmonyos)) then
+                  sepChar := '@'
+                else
+                  sepChar := '#';
                if replaceforbidden then
                  begin
                    { avoid string truncation }
