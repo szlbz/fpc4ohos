@@ -65,7 +65,7 @@ implementation
     fmodule,
     aasmbase,aasmtai,aasmcpu,cpubase,
     cgbase,ogbase,
-    comprsrc,
+    comprsrc, symtable,
     rescmn, i_harmonyos
     ;
 
@@ -146,6 +146,8 @@ Begin
           LinkLibraryOrder.add('gmon','',120);
           LinkLibraryOrder.add('dl','',140);
           LinkLibraryOrder.add('pthread','',160);
+          if defined_macro('FPC_NAPI_SUPPORT') then
+            LinkLibraryOrder.add('ace_napi.z','',200);
          end;
 end;
 
@@ -167,6 +169,9 @@ begin
   result:=False;
   { Always link to libc (musl-based on HarmonyOS) }
   AddSharedLibrary('c');
+  { Link NAPI framework when using NAPI support }
+  if defined_macro('FPC_NAPI_SUPPORT') then
+    AddSharedLibrary('ace_napi.z');
 
   { Add default library search paths for HarmonyOS sysroot }
   if sysrootpath<>'' then
@@ -203,6 +208,11 @@ begin
           repeat
             add('      '+texportlibunix(exportlib).exportedsymnames.getfirst+';');
           until texportlibunix(exportlib).exportedsymnames.empty;
+        end;
+      if defined_macro('FPC_NAPI_SUPPORT') then
+        begin
+          add('    global:');
+          add('      napi_register_module_v1;');
         end;
       add('    local:');
       add('      *;');
