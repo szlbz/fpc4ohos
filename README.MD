@@ -9,6 +9,7 @@
 | Lazarus_QT_Project | Lazarus Build to HarmonyOS 的示例工程 |
 | LazarusOHOS_Wrapper | 鸿蒙调用QT工程，该QT工程负责调用Lazarus编译的.so（Wrapper） |
 | OHOS_HAP_Project | 鸿蒙HAP工程，该工程执行 Wrapper 调用 Lazarus 工程 |
+| napilib | NAPI Lib 接口支持库（ArkTS） |
 
 ---
 
@@ -30,7 +31,7 @@
 
 ​	进入 fpcsrc 目录执行 build.bat ，构建 FPC 及 RTL
 
-	注意：在windows下，这里让as.exe构建程序是由{ARCH}-ohos-as.exe去调用{ARCH}-ohos-as.exe.bat，该bat内容最末尾应该是`%*`而不是`%%*`（单独执行build内命令时,有可能会错误的生成2个%%）
+	注意：在windows下，这里让as.exe构建程序是由{ARCH}-ohos-as.exe去调用{ARCH}-ohos-as.bat，该bat内容最末尾应该是`%*`而不是`%%*`（单独执行build内命令时,有可能会错误的生成2个%%）
 
 ---
 
@@ -77,3 +78,14 @@
 复制编译出的2个.so到 OHOS_HAP_Project\entry\libs\\{osTarget}\ 目录(如x86_64)下。
 
 ---
+
+## FPC NAPI SUPPORT
+FPC NAPI SUPPORT 是 Free Pascal 对 OpenHarmony NAPI 的完整适配层，使 Pascal 代码能编译为 ArkTS 可调用的原生 .so 模块。
+
+napilib.pp	NAPI 接口绑定库，提供全部 C API 的 Pascal 声明（类型、枚举、函数）
+
+使用流程：
+
+fpc + napilib → libxxx.so → HAP → ArkTS import → 调用 Pascal 函数
+
+只需在 Pascal 中定义 cdecl 回调函数，通过 RegisterNAPIMethod 注册，然后 napi_module_register 关联到导出入口。编译产物直接放入 HAP 的 libs/<abi>/ 目录即可被 ArkTS import。

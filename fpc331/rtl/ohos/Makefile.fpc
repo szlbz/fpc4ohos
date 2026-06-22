@@ -210,13 +210,19 @@ ifeq ($(ARCH),riscv64)
 endif
 
 ifeq ($(ARCH),arm)
-  ASTARGET+= -meabi=5
+  ASTARGET+=-meabi=5
 endif
 
 ifneq ($(findstring $(ARCH),aarch64 x86_64 riscv64 loongarch64),)
   CPUBITS=64
 else
   CPUBITS=32
+endif
+ifneq ($(findstring $(ARCH),aarch64 x86_64),)
+  ASTARGET+=-DCPU64
+endif
+ifneq ($(findstring $(ARCH),riscv64 loongarch64),)
+  ASTARGET+=--defsym CPU64=1
 endif
 
 #
