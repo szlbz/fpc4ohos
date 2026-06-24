@@ -31,9 +31,9 @@
   64-bit (aarch64, x86_64, riscv64, loongarch64):
     pthread_attr_t       = 14 ints = 56 bytes
     pthread_mutex_t      = 10 ints = 40 bytes  (see pmutext.inc)
-    pthread_mutexattr_t  =  1 unsigned =  4 bytes
+    pthread_mutexattr_t  =  16 bytes (header 4, runtime needs 16)
     pthread_cond_t       = 12 ints = 48 bytes
-    pthread_condattr_t   =  1 unsigned =  4 bytes
+    pthread_condattr_t   =  16 bytes (header 4, runtime needs 16)
     pthread_rwlock_t     = 14 ints = 56 bytes
     pthread_rwlockattr_t =  2 unsigned =  8 bytes
     pthread_barrier_t    =  8 ints = 32 bytes
@@ -43,9 +43,9 @@
   32-bit (arm):
     pthread_attr_t       =  9 ints = 36 bytes
     pthread_mutex_t      =  6 ints = 24 bytes  (see pmutext.inc)
-    pthread_mutexattr_t  =  1 unsigned =  4 bytes
+    pthread_mutexattr_t  =  16 bytes (header 4, runtime needs 16)
     pthread_cond_t       = 12 ints = 48 bytes
-    pthread_condattr_t   =  1 unsigned =  4 bytes
+    pthread_condattr_t   =  16 bytes (header 4, runtime needs 16)
     pthread_rwlock_t     =  8 ints = 32 bytes
     pthread_rwlockattr_t =  2 unsigned =  8 bytes
     pthread_barrier_t    =  5 ints = 20 bytes
@@ -56,9 +56,9 @@
 {$if defined(CPU64)}
 const
   __SIZEOF_PTHREAD_ATTR_T = 56;
-  __SIZEOF_PTHREAD_MUTEXATTR_T = 4;
+  __SIZEOF_PTHREAD_MUTEXATTR_T = 16; { musl header says 4, but runtime writes 16 }
   __SIZEOF_PTHREAD_COND_T = 48;
-  __SIZEOF_PTHREAD_CONDATTR_T = 4;
+  __SIZEOF_PTHREAD_CONDATTR_T = 16; { musl header says 4, but runtime writes 16 }
   __SIZEOF_PTHREAD_RWLOCK_T = 56;
   __SIZEOF_PTHREAD_RWLOCKATTR_T = 8;
   __SIZEOF_PTHREAD_BARRIER_T = 32;
@@ -67,9 +67,9 @@ const
 {$else : not CPU64, i.e. CPU32}
 const
   __SIZEOF_PTHREAD_ATTR_T = 36;
-  __SIZEOF_PTHREAD_MUTEXATTR_T = 4;
+  __SIZEOF_PTHREAD_MUTEXATTR_T = 16; { musl header says 4, but runtime writes 16 }
   __SIZEOF_PTHREAD_COND_T = 48;
-  __SIZEOF_PTHREAD_CONDATTR_T = 4;
+  __SIZEOF_PTHREAD_CONDATTR_T = 16; { musl header says 4, but runtime writes 16 }
   __SIZEOF_PTHREAD_RWLOCK_T = 32;
   __SIZEOF_PTHREAD_RWLOCKATTR_T = 8;
   __SIZEOF_PTHREAD_BARRIER_T = 20;
