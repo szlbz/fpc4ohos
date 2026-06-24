@@ -64,7 +64,7 @@ REM mklink "%FPCBASE%\fpc\bin\x86_64-win64\%OHOS_ARCH%-ohos-objdump.exe" "F:\loo
 REM mklink "%FPCBASE%\fpc\bin\x86_64-win64\%OHOS_ARCH%-ohos-strip.exe" "F:\loongarch-ohos-sdk\loongarch64-linux\loongarch64-unknown-linux-gnu-strip.exe" 
 
 REM ππΩ®Ωª≤Ê±‡“Î∆˜
-make compiler_cycle OS_TARGET=ohos CPU_TARGET=%OHOS_ARCH% FPC=ppcx64 CROSSINSTALL=1 OPT="-O- -fPIC -O2" CROSSOPT=" -O- -Sg -Cg -O2 -Ur -dohos -Fl%SYSROOT%/usr/lib -k--sysroot=%SYSROOT%" INSTALL_PREFIX=%FPCBASE%\fpc 
+make compiler_cycle OS_TARGET=ohos CPU_TARGET=%OHOS_ARCH% CROSSINSTALL=1 OPT="-O- -fPIC -O2" CROSSOPT=" -O- -Sg -Cg -O2 -Ur -dohos -Fl%SYSROOT%/usr/lib -k--sysroot=%SYSROOT%" INSTALL_PREFIX=%FPCBASE%\fpc 
  
 REM ±‡“ÎΩª≤Ê FPC + OHOS RTL£®win64 °˙ ohos£©£∫Ωª≤Ê±‡“Î∆˜£®ppcrossx64.exe£© + Ωª≤Ê RTL£®x86_64-ohos£©
 make crossinstall OS_TARGET=ohos CPU_TARGET=%OHOS_ARCH% OPT="-O- -fPIC -O2" CROSSOPT=" -O- -Sg -Cg -O2 -Ur -dohos -Fl%SYSROOT%/usr/lib -k--sysroot=%SYSROOT%" INSTALL_PREFIX=%FPCBASE%\fpc 

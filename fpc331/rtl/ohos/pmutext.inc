@@ -21,9 +21,12 @@
 
 {$define USE_PTHREAD_SIZEOF}
 
-{$if defined(cpuaarch64)}
-  {$define __SIZEOF_PTHREAD_MUTEX_T := 48}
-{$elseif defined(CPU64)}
+{ HarmonyOS uses musl libc.
+  musl pthread_mutex_t = struct { union { int __i[N]; ... } __u; }
+  where N = 10 on 64-bit (40 bytes), N = 6 on 32-bit (24 bytes).
+  All 64-bit architectures (aarch64, x86_64, riscv64, loongarch64)
+  use the same size in musl. }
+{$if defined(CPU64)}
   {$define __SIZEOF_PTHREAD_MUTEX_T := 40}
 {$else CPU64}
   {$define __SIZEOF_PTHREAD_MUTEX_T := 24}
@@ -32,16 +35,12 @@
   MUTEXTYPENAME = record
     case byte of
       0 : (
-            __size : array[0..__SIZEOF_PTHREAD_MUTEX_T-1] of AnsiChar;
+             { opaque size, used by pthread API }
+             __size : array[0..__SIZEOF_PTHREAD_MUTEX_T-1] of AnsiChar;
           );
       1 : (
+             { alignment for the struct }
              __align : sizeint;
-          );
-      2 : (
-             pad1, pad2, pad3 {$ifdef cpu64}, pad4{$endif}: longint;
-             { this field is guaranteed to stay at this offset by glibc for
-               binary compatibility with static initialisers }
-             __m_kind: longint;
           );
   end;
 

@@ -66,8 +66,8 @@ DYNLIBSINCDIR=$(UNIXINC)
 # dladdr() is provided by system libdl on ohos, no Android workaround needed
 
 TERMIODIR=$(LINUXINC)
-PTHREADINCDIR=$(LINUXINC)
-PTYPESINCDIR=$(LINUXINC)
+PTHREADINCDIR=$(RTL)/ohos
+PTYPESINCDIR=$(RTL)/ohos
 UNXINC=$(LINUXINC)
 
 # OHOS has its own system.pp with OHOS-specific initialization (sysoshimp.inc)
